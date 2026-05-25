@@ -56,6 +56,12 @@ body {
     "Hiragino Sans", "Yu Gothic", "Meiryo", "Avenir Next", sans-serif;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
 ::selection {
   background: var(--primary);
   color: var(--text);

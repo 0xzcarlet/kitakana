@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AppShell } from "@kitakana/ui";
+import { RouteAwareAppShell } from "@/components/app-shell/RouteAwareAppShell";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="id" className="h-full antialiased">
       <body className="min-h-full">
-        <AppShell>{children}</AppShell>
+        <RouteAwareAppShell>{children}</RouteAwareAppShell>
       </body>
     </html>
   );

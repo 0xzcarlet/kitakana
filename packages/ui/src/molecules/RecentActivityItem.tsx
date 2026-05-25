@@ -14,7 +14,7 @@ export function RecentActivityItem({
   title,
 }: RecentActivityItemProps) {
   return (
-    <li className="flex items-center gap-4 rounded-3xl bg-bg-soft/70 p-3">
+    <li className="flex min-w-0 items-center gap-3 rounded-3xl bg-bg-soft/70 p-3 sm:gap-4">
       <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-card font-display text-2xl font-extrabold text-text shadow-sm">
         {kana}
       </span>
@@ -24,7 +24,9 @@ export function RecentActivityItem({
         </p>
         <p className="truncate text-sm text-text-muted">{detail}</p>
       </div>
-      <Badge tone="cream">{time}</Badge>
+      <Badge className="shrink-0 px-2.5 sm:px-3" tone="cream">
+        {time}
+      </Badge>
     </li>
   );
 }

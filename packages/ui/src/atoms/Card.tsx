@@ -23,7 +23,7 @@ export function Card({
   return (
     <div
       className={cx(
-        "rounded-[2rem] border p-5 shadow-[0_20px_50px_rgba(79,37,46,0.08)]",
+        "min-w-0 rounded-[2rem] border p-5 shadow-[0_20px_50px_rgba(79,37,46,0.08)]",
         toneClasses[tone],
         className,
       )}

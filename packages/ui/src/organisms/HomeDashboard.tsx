@@ -29,12 +29,12 @@ const activities = [
 
 export function HomeDashboard() {
   return (
-    <div className="space-y-6">
+    <div className="min-w-0 space-y-6">
       <ReviewPromptCard dueCount={12} />
 
       <section
         aria-label="Ringkasan progress hari ini"
-        className="grid gap-4 md:grid-cols-3"
+        className="grid min-w-0 gap-4 md:grid-cols-3"
       >
         <StatCard
           detail="Ritme kecil yang konsisten lebih kuat dari sesi panjang."
@@ -61,7 +61,7 @@ export function HomeDashboard() {
         />
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+      <section className="grid min-w-0 gap-6 xl:grid-cols-[1.1fr_0.9fr]">
         <Card className="space-y-5" tone="paper">
           <div className="flex items-start justify-between gap-4">
             <div>
@@ -81,12 +81,12 @@ export function HomeDashboard() {
             </span>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid min-w-0 gap-5 sm:grid-cols-2">
             <ProgressBar label="Kana progress" value={42} />
             <ProgressBar label="Kosakata N5" value={28} />
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid min-w-0 gap-3 sm:grid-cols-2">
             <ShortcutCard
               description="Buka chart dan pelajari bentuk dasar dengan romaji."
               href="/kana"
