@@ -1,6 +1,6 @@
-# PRD — Nihonote
+# PRD — Kitakana
 
-**Product Name:** Nihonote  
+**Product Name:** Kitakana  
 **Product Type:** Open-source Japanese Learning PWA  
 **Platform:** Web-first, installable as PWA  
 **Primary Stack:** Next.js, TypeScript, Tailwind CSS, JSON data  
@@ -11,11 +11,11 @@
 
 ## 1. Product Overview
 
-Nihonote adalah aplikasi belajar bahasa Jepang berbasis web yang dirancang sebagai **PWA, offline-first, dan open source**. Fokus utama versi awal adalah membantu user belajar dari dasar melalui **kana chart, kana quiz, vocabulary flashcards, review harian, dan progress tracking lokal**.
+Kitakana adalah aplikasi belajar bahasa Jepang berbasis web yang dirancang sebagai **PWA, offline-first, dan open source**. Fokus utama versi awal adalah membantu user belajar dari dasar melalui **kana chart, kana quiz, vocabulary flashcards, review harian, dan progress tracking lokal**.
 
 Aplikasi ini tidak mewajibkan login pada versi awal agar user bisa langsung belajar tanpa hambatan. Semua data awal seperti hiragana, katakana, vocabulary, dan metadata pembelajaran disimpan dalam format **JSON** agar mudah dikelola, dikembangkan, dan dikontribusikan oleh komunitas.
 
-Nihonote mendukung tampilan materi bahasa Jepang dengan terjemahan sesuai preferensi user, terutama:
+Kitakana mendukung tampilan materi bahasa Jepang dengan terjemahan sesuai preferensi user, terutama:
 
 - Japanese text
 - Kana reading
@@ -46,7 +46,7 @@ Contoh data:
 
 Banyak aplikasi belajar bahasa Jepang yang sudah tersedia, tetapi beberapa memiliki hambatan seperti wajib login, terlalu berat, terlalu gamified, tidak fleksibel untuk self-learning, atau tidak mudah dimodifikasi oleh developer lain.
 
-Nihonote dibuat untuk menjadi alternatif yang:
+Kitakana dibuat untuk menjadi alternatif yang:
 
 - ringan,
 - cepat digunakan,
@@ -142,7 +142,7 @@ Fitur tersebut dapat masuk ke roadmap setelah versi MVP stabil.
 
 ### 7.1 No Login First
 
-Versi awal Nihonote tidak membutuhkan login.
+Versi awal Kitakana tidak membutuhkan login.
 
 Alasan:
 
@@ -203,7 +203,7 @@ Keuntungan:
 
 ### 7.5 Clean UX over Feature Quantity
 
-Nihonote harus terasa ringan, fokus, dan nyaman dipakai.
+Kitakana harus terasa ringan, fokus, dan nyaman dipakai.
 
 Prinsip UX:
 
@@ -472,7 +472,7 @@ English:
 
 ### 12.1 Architecture Type
 
-Nihonote menggunakan:
+Kitakana menggunakan:
 
 ```text
 Monorepo + Local-first Frontend App + JSON Content Data + PWA
@@ -527,7 +527,7 @@ Turborepo bisa dipakai jika package mulai banyak. Untuk MVP awal, pnpm workspace
 ### 13.2 Proposed Monorepo Structure
 
 ```text
-nihonote/
+Kitakana/
 ├── apps/
 │   └── web/
 │       ├── app/
@@ -713,7 +713,7 @@ Responsibilities:
 
 ## 15. Atomic Design System
 
-Nihonote menggunakan Atomic Design agar component lebih rapi dan mudah dimaintain.
+Kitakana menggunakan Atomic Design agar component lebih rapi dan mudah dimaintain.
 
 ### 15.1 Atoms
 
@@ -835,7 +835,7 @@ apps/web/app/settings/page.tsx
 
 ### 16.1 Design Style
 
-Nihonote harus terasa:
+Kitakana harus terasa:
 
 - calm,
 - clean,
@@ -1502,7 +1502,7 @@ Mitigation:
 
 ## 25. Final MVP Definition
 
-Nihonote MVP adalah aplikasi web PWA open-source untuk belajar bahasa Jepang yang memiliki:
+Kitakana MVP adalah aplikasi web PWA open-source untuk belajar bahasa Jepang yang memiliki:
 
 - no login,
 - local-first progress,

@@ -1,0 +1,20 @@
+import { Badge } from "../atoms";
+
+export function AppHeader() {
+  return (
+    <header className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <p className="font-display text-4xl font-extrabold leading-tight text-text sm:text-5xl">
+          Kitakana
+        </p>
+        <p className="mt-2 max-w-2xl text-base leading-7 text-text-muted">
+          Belajar kana, kosakata, dan review harian tanpa login.
+        </p>
+      </div>
+      <div className="flex flex-wrap gap-2">
+        <Badge tone="aqua">Offline-first</Badge>
+        <Badge tone="orange">Local progress</Badge>
+      </div>
+    </header>
+  );
+}

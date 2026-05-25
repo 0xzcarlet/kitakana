@@ -1,26 +1,67 @@
 @import "tailwindcss";
+@source "../../../../packages/ui/src";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff7c5;
+  --foreground: #4f252e;
+  --bg: #fff7c5;
+  --bg-soft: #fffbe2;
+
+  --surface: #c1ebe9;
+  --surface-strong: #a8dfdc;
+
+  --primary: #f4ae52;
+  --primary-hover: #e39a3b;
+
+  --text: #4f252e;
+  --text-muted: #7b5a61;
+
+  --border: #e7d9a8;
+  --ring: #f4ae52;
+
+  --card: #fffdf0;
+  --card-foreground: #4f252e;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --font-sans:
+    "Hiragino Sans", "Yu Gothic", "Meiryo", "Avenir Next", sans-serif;
+  --font-mono:
+    "SFMono-Regular", "Cascadia Code", "Liberation Mono", monospace;
+  --font-display:
+    "Arial Rounded MT Bold", "Avenir Next", "Hiragino Sans", sans-serif;
 }
 
 body {
-  background: var(--background);
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 16% 8%, rgb(193 235 233 / 0.65), transparent 28rem),
+    radial-gradient(circle at 85% 2%, rgb(244 174 82 / 0.22), transparent 24rem),
+    linear-gradient(180deg, var(--background), #fff3b2 100%);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:
+    "Hiragino Sans", "Yu Gothic", "Meiryo", "Avenir Next", sans-serif;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--text);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
 }

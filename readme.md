@@ -1,6 +1,6 @@
-# Nihonote
+# Kitakana
 
-Nihonote adalah open-source Japanese learning PWA yang dibangun sebagai monorepo. Fokus MVP-nya adalah pengalaman belajar yang ringan, local-first, dan offline-first untuk kana, quiz, vocabulary, review harian, dan progress tracking lokal.
+Kitakana adalah open-source Japanese learning PWA yang dibangun sebagai monorepo. Fokus MVP-nya adalah pengalaman belajar yang ringan, local-first, dan offline-first untuk kana, quiz, vocabulary, review harian, dan progress tracking lokal.
 
 ## Tech Stack
 
@@ -29,7 +29,7 @@ Nihonote adalah open-source Japanese learning PWA yang dibangun sebagai monorepo
 
 ### `apps/web`
 
-Web app utama Nihonote. Saat ini workspace ini berisi aplikasi Next.js untuk produk web-first/PWA.
+Web app utama Kitakana. Saat ini workspace ini berisi aplikasi Next.js untuk produk web-first/PWA.
 
 Untuk menjalankan development server dari root:
 
