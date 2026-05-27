@@ -1,0 +1,130 @@
+[
+  { "id": "katakana-a", "kana": "ア", "romaji": "a", "type": "katakana", "group": "vowel", "order": 1 },
+  { "id": "katakana-i", "kana": "イ", "romaji": "i", "type": "katakana", "group": "vowel", "order": 2 },
+  { "id": "katakana-u", "kana": "ウ", "romaji": "u", "type": "katakana", "group": "vowel", "order": 3 },
+  { "id": "katakana-e", "kana": "エ", "romaji": "e", "type": "katakana", "group": "vowel", "order": 4 },
+  { "id": "katakana-o", "kana": "オ", "romaji": "o", "type": "katakana", "group": "vowel", "order": 5 },
+
+  { "id": "katakana-ka", "kana": "カ", "romaji": "ka", "type": "katakana", "group": "k", "order": 6 },
+  { "id": "katakana-ki", "kana": "キ", "romaji": "ki", "type": "katakana", "group": "k", "order": 7 },
+  { "id": "katakana-ku", "kana": "ク", "romaji": "ku", "type": "katakana", "group": "k", "order": 8 },
+  { "id": "katakana-ke", "kana": "ケ", "romaji": "ke", "type": "katakana", "group": "k", "order": 9 },
+  { "id": "katakana-ko", "kana": "コ", "romaji": "ko", "type": "katakana", "group": "k", "order": 10 },
+
+  { "id": "katakana-sa", "kana": "サ", "romaji": "sa", "type": "katakana", "group": "s", "order": 11 },
+  { "id": "katakana-shi", "kana": "シ", "romaji": "shi", "type": "katakana", "group": "s", "order": 12 },
+  { "id": "katakana-su", "kana": "ス", "romaji": "su", "type": "katakana", "group": "s", "order": 13 },
+  { "id": "katakana-se", "kana": "セ", "romaji": "se", "type": "katakana", "group": "s", "order": 14 },
+  { "id": "katakana-so", "kana": "ソ", "romaji": "so", "type": "katakana", "group": "s", "order": 15 },
+
+  { "id": "katakana-ta", "kana": "タ", "romaji": "ta", "type": "katakana", "group": "t", "order": 16 },
+  { "id": "katakana-chi", "kana": "チ", "romaji": "chi", "type": "katakana", "group": "t", "order": 17 },
+  { "id": "katakana-tsu", "kana": "ツ", "romaji": "tsu", "type": "katakana", "group": "t", "order": 18 },
+  { "id": "katakana-te", "kana": "テ", "romaji": "te", "type": "katakana", "group": "t", "order": 19 },
+  { "id": "katakana-to", "kana": "ト", "romaji": "to", "type": "katakana", "group": "t", "order": 20 },
+
+  { "id": "katakana-na", "kana": "ナ", "romaji": "na", "type": "katakana", "group": "n", "order": 21 },
+  { "id": "katakana-ni", "kana": "ニ", "romaji": "ni", "type": "katakana", "group": "n", "order": 22 },
+  { "id": "katakana-nu", "kana": "ヌ", "romaji": "nu", "type": "katakana", "group": "n", "order": 23 },
+  { "id": "katakana-ne", "kana": "ネ", "romaji": "ne", "type": "katakana", "group": "n", "order": 24 },
+  { "id": "katakana-no", "kana": "ノ", "romaji": "no", "type": "katakana", "group": "n", "order": 25 },
+
+  { "id": "katakana-ha", "kana": "ハ", "romaji": "ha", "type": "katakana", "group": "h", "order": 26 },
+  { "id": "katakana-hi", "kana": "ヒ", "romaji": "hi", "type": "katakana", "group": "h", "order": 27 },
+  { "id": "katakana-fu", "kana": "フ", "romaji": "fu", "type": "katakana", "group": "h", "order": 28 },
+  { "id": "katakana-he", "kana": "ヘ", "romaji": "he", "type": "katakana", "group": "h", "order": 29 },
+  { "id": "katakana-ho", "kana": "ホ", "romaji": "ho", "type": "katakana", "group": "h", "order": 30 },
+
+  { "id": "katakana-ma", "kana": "マ", "romaji": "ma", "type": "katakana", "group": "m", "order": 31 },
+  { "id": "katakana-mi", "kana": "ミ", "romaji": "mi", "type": "katakana", "group": "m", "order": 32 },
+  { "id": "katakana-mu", "kana": "ム", "romaji": "mu", "type": "katakana", "group": "m", "order": 33 },
+  { "id": "katakana-me", "kana": "メ", "romaji": "me", "type": "katakana", "group": "m", "order": 34 },
+  { "id": "katakana-mo", "kana": "モ", "romaji": "mo", "type": "katakana", "group": "m", "order": 35 },
+
+  { "id": "katakana-ya", "kana": "ヤ", "romaji": "ya", "type": "katakana", "group": "y", "order": 36 },
+  { "id": "katakana-yu", "kana": "ユ", "romaji": "yu", "type": "katakana", "group": "y", "order": 37 },
+  { "id": "katakana-yo", "kana": "ヨ", "romaji": "yo", "type": "katakana", "group": "y", "order": 38 },
+
+  { "id": "katakana-ra", "kana": "ラ", "romaji": "ra", "type": "katakana", "group": "r", "order": 39 },
+  { "id": "katakana-ri", "kana": "リ", "romaji": "ri", "type": "katakana", "group": "r", "order": 40 },
+  { "id": "katakana-ru", "kana": "ル", "romaji": "ru", "type": "katakana", "group": "r", "order": 41 },
+  { "id": "katakana-re", "kana": "レ", "romaji": "re", "type": "katakana", "group": "r", "order": 42 },
+  { "id": "katakana-ro", "kana": "ロ", "romaji": "ro", "type": "katakana", "group": "r", "order": 43 },
+
+  { "id": "katakana-wa", "kana": "ワ", "romaji": "wa", "type": "katakana", "group": "w", "order": 44 },
+  { "id": "katakana-wo", "kana": "ヲ", "romaji": "wo", "type": "katakana", "group": "w", "order": 45 },
+
+  { "id": "katakana-n", "kana": "ン", "romaji": "n", "type": "katakana", "group": "n-special", "order": 46 },
+
+  { "id": "katakana-ga", "kana": "ガ", "romaji": "ga", "type": "katakana", "group": "dakuten", "order": 47, "isDakuten": true },
+  { "id": "katakana-gi", "kana": "ギ", "romaji": "gi", "type": "katakana", "group": "dakuten", "order": 48, "isDakuten": true },
+  { "id": "katakana-gu", "kana": "グ", "romaji": "gu", "type": "katakana", "group": "dakuten", "order": 49, "isDakuten": true },
+  { "id": "katakana-ge", "kana": "ゲ", "romaji": "ge", "type": "katakana", "group": "dakuten", "order": 50, "isDakuten": true },
+  { "id": "katakana-go", "kana": "ゴ", "romaji": "go", "type": "katakana", "group": "dakuten", "order": 51, "isDakuten": true },
+
+  { "id": "katakana-za", "kana": "ザ", "romaji": "za", "type": "katakana", "group": "dakuten", "order": 52, "isDakuten": true },
+  { "id": "katakana-ji", "kana": "ジ", "romaji": "ji", "type": "katakana", "group": "dakuten", "order": 53, "isDakuten": true },
+  { "id": "katakana-zu", "kana": "ズ", "romaji": "zu", "type": "katakana", "group": "dakuten", "order": 54, "isDakuten": true },
+  { "id": "katakana-ze", "kana": "ゼ", "romaji": "ze", "type": "katakana", "group": "dakuten", "order": 55, "isDakuten": true },
+  { "id": "katakana-zo", "kana": "ゾ", "romaji": "zo", "type": "katakana", "group": "dakuten", "order": 56, "isDakuten": true },
+
+  { "id": "katakana-da", "kana": "ダ", "romaji": "da", "type": "katakana", "group": "dakuten", "order": 57, "isDakuten": true },
+  { "id": "katakana-de", "kana": "デ", "romaji": "de", "type": "katakana", "group": "dakuten", "order": 58, "isDakuten": true },
+  { "id": "katakana-do", "kana": "ド", "romaji": "do", "type": "katakana", "group": "dakuten", "order": 59, "isDakuten": true },
+
+  { "id": "katakana-ba", "kana": "バ", "romaji": "ba", "type": "katakana", "group": "dakuten", "order": 60, "isDakuten": true },
+  { "id": "katakana-bi", "kana": "ビ", "romaji": "bi", "type": "katakana", "group": "dakuten", "order": 61, "isDakuten": true },
+  { "id": "katakana-bu", "kana": "ブ", "romaji": "bu", "type": "katakana", "group": "dakuten", "order": 62, "isDakuten": true },
+  { "id": "katakana-be", "kana": "ベ", "romaji": "be", "type": "katakana", "group": "dakuten", "order": 63, "isDakuten": true },
+  { "id": "katakana-bo", "kana": "ボ", "romaji": "bo", "type": "katakana", "group": "dakuten", "order": 64, "isDakuten": true },
+
+  { "id": "katakana-pa", "kana": "パ", "romaji": "pa", "type": "katakana", "group": "handakuten", "order": 65, "isHandakuten": true },
+  { "id": "katakana-pi", "kana": "ピ", "romaji": "pi", "type": "katakana", "group": "handakuten", "order": 66, "isHandakuten": true },
+  { "id": "katakana-pu", "kana": "プ", "romaji": "pu", "type": "katakana", "group": "handakuten", "order": 67, "isHandakuten": true },
+  { "id": "katakana-pe", "kana": "ペ", "romaji": "pe", "type": "katakana", "group": "handakuten", "order": 68, "isHandakuten": true },
+  { "id": "katakana-po", "kana": "ポ", "romaji": "po", "type": "katakana", "group": "handakuten", "order": 69, "isHandakuten": true },
+
+  { "id": "katakana-kya", "kana": "キャ", "romaji": "kya", "type": "katakana", "group": "yoon", "order": 70, "isYoon": true },
+  { "id": "katakana-kyu", "kana": "キュ", "romaji": "kyu", "type": "katakana", "group": "yoon", "order": 71, "isYoon": true },
+  { "id": "katakana-kyo", "kana": "キョ", "romaji": "kyo", "type": "katakana", "group": "yoon", "order": 72, "isYoon": true },
+
+  { "id": "katakana-sha", "kana": "シャ", "romaji": "sha", "type": "katakana", "group": "yoon", "order": 73, "isYoon": true },
+  { "id": "katakana-shu", "kana": "シュ", "romaji": "shu", "type": "katakana", "group": "yoon", "order": 74, "isYoon": true },
+  { "id": "katakana-sho", "kana": "ショ", "romaji": "sho", "type": "katakana", "group": "yoon", "order": 75, "isYoon": true },
+
+  { "id": "katakana-cha", "kana": "チャ", "romaji": "cha", "type": "katakana", "group": "yoon", "order": 76, "isYoon": true },
+  { "id": "katakana-chu", "kana": "チュ", "romaji": "chu", "type": "katakana", "group": "yoon", "order": 77, "isYoon": true },
+  { "id": "katakana-cho", "kana": "チョ", "romaji": "cho", "type": "katakana", "group": "yoon", "order": 78, "isYoon": true },
+
+  { "id": "katakana-nya", "kana": "ニャ", "romaji": "nya", "type": "katakana", "group": "yoon", "order": 79, "isYoon": true },
+  { "id": "katakana-nyu", "kana": "ニュ", "romaji": "nyu", "type": "katakana", "group": "yoon", "order": 80, "isYoon": true },
+  { "id": "katakana-nyo", "kana": "ニョ", "romaji": "nyo", "type": "katakana", "group": "yoon", "order": 81, "isYoon": true },
+
+  { "id": "katakana-hya", "kana": "ヒャ", "romaji": "hya", "type": "katakana", "group": "yoon", "order": 82, "isYoon": true },
+  { "id": "katakana-hyu", "kana": "ヒュ", "romaji": "hyu", "type": "katakana", "group": "yoon", "order": 83, "isYoon": true },
+  { "id": "katakana-hyo", "kana": "ヒョ", "romaji": "hyo", "type": "katakana", "group": "yoon", "order": 84, "isYoon": true },
+
+  { "id": "katakana-mya", "kana": "ミャ", "romaji": "mya", "type": "katakana", "group": "yoon", "order": 85, "isYoon": true },
+  { "id": "katakana-myu", "kana": "ミュ", "romaji": "myu", "type": "katakana", "group": "yoon", "order": 86, "isYoon": true },
+  { "id": "katakana-myo", "kana": "ミョ", "romaji": "myo", "type": "katakana", "group": "yoon", "order": 87, "isYoon": true },
+
+  { "id": "katakana-rya", "kana": "リャ", "romaji": "rya", "type": "katakana", "group": "yoon", "order": 88, "isYoon": true },
+  { "id": "katakana-ryu", "kana": "リュ", "romaji": "ryu", "type": "katakana", "group": "yoon", "order": 89, "isYoon": true },
+  { "id": "katakana-ryo", "kana": "リョ", "romaji": "ryo", "type": "katakana", "group": "yoon", "order": 90, "isYoon": true },
+
+  { "id": "katakana-gya", "kana": "ギャ", "romaji": "gya", "type": "katakana", "group": "yoon", "order": 91, "isYoon": true, "isDakuten": true },
+  { "id": "katakana-gyu", "kana": "ギュ", "romaji": "gyu", "type": "katakana", "group": "yoon", "order": 92, "isYoon": true, "isDakuten": true },
+  { "id": "katakana-gyo", "kana": "ギョ", "romaji": "gyo", "type": "katakana", "group": "yoon", "order": 93, "isYoon": true, "isDakuten": true },
+
+  { "id": "katakana-ja", "kana": "ジャ", "romaji": "ja", "type": "katakana", "group": "yoon", "order": 94, "isYoon": true, "isDakuten": true },
+  { "id": "katakana-ju", "kana": "ジュ", "romaji": "ju", "type": "katakana", "group": "yoon", "order": 95, "isYoon": true, "isDakuten": true },
+  { "id": "katakana-jo", "kana": "ジョ", "romaji": "jo", "type": "katakana", "group": "yoon", "order": 96, "isYoon": true, "isDakuten": true },
+
+  { "id": "katakana-bya", "kana": "ビャ", "romaji": "bya", "type": "katakana", "group": "yoon", "order": 97, "isYoon": true, "isDakuten": true },
+  { "id": "katakana-byu", "kana": "ビュ", "romaji": "byu", "type": "katakana", "group": "yoon", "order": 98, "isYoon": true, "isDakuten": true },
+  { "id": "katakana-byo", "kana": "ビョ", "romaji": "byo", "type": "katakana", "group": "yoon", "order": 99, "isYoon": true, "isDakuten": true },
+
+  { "id": "katakana-pya", "kana": "ピャ", "romaji": "pya", "type": "katakana", "group": "yoon", "order": 100, "isYoon": true, "isHandakuten": true },
+  { "id": "katakana-pyu", "kana": "ピュ", "romaji": "pyu", "type": "katakana", "group": "yoon", "order": 101, "isYoon": true, "isHandakuten": true },
+  { "id": "katakana-pyo", "kana": "ピョ", "romaji": "pyo", "type": "katakana", "group": "yoon", "order": 102, "isYoon": true, "isHandakuten": true }
+]

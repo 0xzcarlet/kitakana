@@ -5,10 +5,15 @@
   "description": "Open-source Japanese learning PWA for kana, vocabulary, and simple spaced repetition.",
   "packageManager": "pnpm@10.0.0",
   "scripts": {
-    "dev": "pnpm --filter web dev",
-    "build": "pnpm --filter web build",
-    "start": "pnpm --filter web start",
-    "lint": "pnpm --filter web lint",
-    "typecheck": "pnpm --filter web typecheck"
+    "dev": "corepack pnpm --filter web dev",
+    "build": "corepack pnpm --filter web build",
+    "start": "corepack pnpm --filter web start",
+    "lint": "corepack pnpm --filter web lint",
+    "test": "corepack pnpm --filter @kitakana/content test && corepack pnpm --filter @kitakana/core test",
+    "test:e2e": "playwright test",
+    "typecheck": "corepack pnpm --filter @kitakana/content typecheck && corepack pnpm --filter @kitakana/core typecheck && corepack pnpm --filter web typecheck"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0"
   }
 }

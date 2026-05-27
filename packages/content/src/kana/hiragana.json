@@ -1,0 +1,130 @@
+[
+  { "id": "hiragana-a", "kana": "あ", "romaji": "a", "type": "hiragana", "group": "vowel", "order": 1 },
+  { "id": "hiragana-i", "kana": "い", "romaji": "i", "type": "hiragana", "group": "vowel", "order": 2 },
+  { "id": "hiragana-u", "kana": "う", "romaji": "u", "type": "hiragana", "group": "vowel", "order": 3 },
+  { "id": "hiragana-e", "kana": "え", "romaji": "e", "type": "hiragana", "group": "vowel", "order": 4 },
+  { "id": "hiragana-o", "kana": "お", "romaji": "o", "type": "hiragana", "group": "vowel", "order": 5 },
+
+  { "id": "hiragana-ka", "kana": "か", "romaji": "ka", "type": "hiragana", "group": "k", "order": 6 },
+  { "id": "hiragana-ki", "kana": "き", "romaji": "ki", "type": "hiragana", "group": "k", "order": 7 },
+  { "id": "hiragana-ku", "kana": "く", "romaji": "ku", "type": "hiragana", "group": "k", "order": 8 },
+  { "id": "hiragana-ke", "kana": "け", "romaji": "ke", "type": "hiragana", "group": "k", "order": 9 },
+  { "id": "hiragana-ko", "kana": "こ", "romaji": "ko", "type": "hiragana", "group": "k", "order": 10 },
+
+  { "id": "hiragana-sa", "kana": "さ", "romaji": "sa", "type": "hiragana", "group": "s", "order": 11 },
+  { "id": "hiragana-shi", "kana": "し", "romaji": "shi", "type": "hiragana", "group": "s", "order": 12 },
+  { "id": "hiragana-su", "kana": "す", "romaji": "su", "type": "hiragana", "group": "s", "order": 13 },
+  { "id": "hiragana-se", "kana": "せ", "romaji": "se", "type": "hiragana", "group": "s", "order": 14 },
+  { "id": "hiragana-so", "kana": "そ", "romaji": "so", "type": "hiragana", "group": "s", "order": 15 },
+
+  { "id": "hiragana-ta", "kana": "た", "romaji": "ta", "type": "hiragana", "group": "t", "order": 16 },
+  { "id": "hiragana-chi", "kana": "ち", "romaji": "chi", "type": "hiragana", "group": "t", "order": 17 },
+  { "id": "hiragana-tsu", "kana": "つ", "romaji": "tsu", "type": "hiragana", "group": "t", "order": 18 },
+  { "id": "hiragana-te", "kana": "て", "romaji": "te", "type": "hiragana", "group": "t", "order": 19 },
+  { "id": "hiragana-to", "kana": "と", "romaji": "to", "type": "hiragana", "group": "t", "order": 20 },
+
+  { "id": "hiragana-na", "kana": "な", "romaji": "na", "type": "hiragana", "group": "n", "order": 21 },
+  { "id": "hiragana-ni", "kana": "に", "romaji": "ni", "type": "hiragana", "group": "n", "order": 22 },
+  { "id": "hiragana-nu", "kana": "ぬ", "romaji": "nu", "type": "hiragana", "group": "n", "order": 23 },
+  { "id": "hiragana-ne", "kana": "ね", "romaji": "ne", "type": "hiragana", "group": "n", "order": 24 },
+  { "id": "hiragana-no", "kana": "の", "romaji": "no", "type": "hiragana", "group": "n", "order": 25 },
+
+  { "id": "hiragana-ha", "kana": "は", "romaji": "ha", "type": "hiragana", "group": "h", "order": 26 },
+  { "id": "hiragana-hi", "kana": "ひ", "romaji": "hi", "type": "hiragana", "group": "h", "order": 27 },
+  { "id": "hiragana-fu", "kana": "ふ", "romaji": "fu", "type": "hiragana", "group": "h", "order": 28 },
+  { "id": "hiragana-he", "kana": "へ", "romaji": "he", "type": "hiragana", "group": "h", "order": 29 },
+  { "id": "hiragana-ho", "kana": "ほ", "romaji": "ho", "type": "hiragana", "group": "h", "order": 30 },
+
+  { "id": "hiragana-ma", "kana": "ま", "romaji": "ma", "type": "hiragana", "group": "m", "order": 31 },
+  { "id": "hiragana-mi", "kana": "み", "romaji": "mi", "type": "hiragana", "group": "m", "order": 32 },
+  { "id": "hiragana-mu", "kana": "む", "romaji": "mu", "type": "hiragana", "group": "m", "order": 33 },
+  { "id": "hiragana-me", "kana": "め", "romaji": "me", "type": "hiragana", "group": "m", "order": 34 },
+  { "id": "hiragana-mo", "kana": "も", "romaji": "mo", "type": "hiragana", "group": "m", "order": 35 },
+
+  { "id": "hiragana-ya", "kana": "や", "romaji": "ya", "type": "hiragana", "group": "y", "order": 36 },
+  { "id": "hiragana-yu", "kana": "ゆ", "romaji": "yu", "type": "hiragana", "group": "y", "order": 37 },
+  { "id": "hiragana-yo", "kana": "よ", "romaji": "yo", "type": "hiragana", "group": "y", "order": 38 },
+
+  { "id": "hiragana-ra", "kana": "ら", "romaji": "ra", "type": "hiragana", "group": "r", "order": 39 },
+  { "id": "hiragana-ri", "kana": "り", "romaji": "ri", "type": "hiragana", "group": "r", "order": 40 },
+  { "id": "hiragana-ru", "kana": "る", "romaji": "ru", "type": "hiragana", "group": "r", "order": 41 },
+  { "id": "hiragana-re", "kana": "れ", "romaji": "re", "type": "hiragana", "group": "r", "order": 42 },
+  { "id": "hiragana-ro", "kana": "ろ", "romaji": "ro", "type": "hiragana", "group": "r", "order": 43 },
+
+  { "id": "hiragana-wa", "kana": "わ", "romaji": "wa", "type": "hiragana", "group": "w", "order": 44 },
+  { "id": "hiragana-wo", "kana": "を", "romaji": "wo", "type": "hiragana", "group": "w", "order": 45 },
+
+  { "id": "hiragana-n", "kana": "ん", "romaji": "n", "type": "hiragana", "group": "n-special", "order": 46 },
+
+  { "id": "hiragana-ga", "kana": "が", "romaji": "ga", "type": "hiragana", "group": "dakuten", "order": 47, "isDakuten": true },
+  { "id": "hiragana-gi", "kana": "ぎ", "romaji": "gi", "type": "hiragana", "group": "dakuten", "order": 48, "isDakuten": true },
+  { "id": "hiragana-gu", "kana": "ぐ", "romaji": "gu", "type": "hiragana", "group": "dakuten", "order": 49, "isDakuten": true },
+  { "id": "hiragana-ge", "kana": "げ", "romaji": "ge", "type": "hiragana", "group": "dakuten", "order": 50, "isDakuten": true },
+  { "id": "hiragana-go", "kana": "ご", "romaji": "go", "type": "hiragana", "group": "dakuten", "order": 51, "isDakuten": true },
+
+  { "id": "hiragana-za", "kana": "ざ", "romaji": "za", "type": "hiragana", "group": "dakuten", "order": 52, "isDakuten": true },
+  { "id": "hiragana-ji", "kana": "じ", "romaji": "ji", "type": "hiragana", "group": "dakuten", "order": 53, "isDakuten": true },
+  { "id": "hiragana-zu", "kana": "ず", "romaji": "zu", "type": "hiragana", "group": "dakuten", "order": 54, "isDakuten": true },
+  { "id": "hiragana-ze", "kana": "ぜ", "romaji": "ze", "type": "hiragana", "group": "dakuten", "order": 55, "isDakuten": true },
+  { "id": "hiragana-zo", "kana": "ぞ", "romaji": "zo", "type": "hiragana", "group": "dakuten", "order": 56, "isDakuten": true },
+
+  { "id": "hiragana-da", "kana": "だ", "romaji": "da", "type": "hiragana", "group": "dakuten", "order": 57, "isDakuten": true },
+  { "id": "hiragana-de", "kana": "で", "romaji": "de", "type": "hiragana", "group": "dakuten", "order": 58, "isDakuten": true },
+  { "id": "hiragana-do", "kana": "ど", "romaji": "do", "type": "hiragana", "group": "dakuten", "order": 59, "isDakuten": true },
+
+  { "id": "hiragana-ba", "kana": "ば", "romaji": "ba", "type": "hiragana", "group": "dakuten", "order": 60, "isDakuten": true },
+  { "id": "hiragana-bi", "kana": "び", "romaji": "bi", "type": "hiragana", "group": "dakuten", "order": 61, "isDakuten": true },
+  { "id": "hiragana-bu", "kana": "ぶ", "romaji": "bu", "type": "hiragana", "group": "dakuten", "order": 62, "isDakuten": true },
+  { "id": "hiragana-be", "kana": "べ", "romaji": "be", "type": "hiragana", "group": "dakuten", "order": 63, "isDakuten": true },
+  { "id": "hiragana-bo", "kana": "ぼ", "romaji": "bo", "type": "hiragana", "group": "dakuten", "order": 64, "isDakuten": true },
+
+  { "id": "hiragana-pa", "kana": "ぱ", "romaji": "pa", "type": "hiragana", "group": "handakuten", "order": 65, "isHandakuten": true },
+  { "id": "hiragana-pi", "kana": "ぴ", "romaji": "pi", "type": "hiragana", "group": "handakuten", "order": 66, "isHandakuten": true },
+  { "id": "hiragana-pu", "kana": "ぷ", "romaji": "pu", "type": "hiragana", "group": "handakuten", "order": 67, "isHandakuten": true },
+  { "id": "hiragana-pe", "kana": "ぺ", "romaji": "pe", "type": "hiragana", "group": "handakuten", "order": 68, "isHandakuten": true },
+  { "id": "hiragana-po", "kana": "ぽ", "romaji": "po", "type": "hiragana", "group": "handakuten", "order": 69, "isHandakuten": true },
+
+  { "id": "hiragana-kya", "kana": "きゃ", "romaji": "kya", "type": "hiragana", "group": "yoon", "order": 70, "isYoon": true },
+  { "id": "hiragana-kyu", "kana": "きゅ", "romaji": "kyu", "type": "hiragana", "group": "yoon", "order": 71, "isYoon": true },
+  { "id": "hiragana-kyo", "kana": "きょ", "romaji": "kyo", "type": "hiragana", "group": "yoon", "order": 72, "isYoon": true },
+
+  { "id": "hiragana-sha", "kana": "しゃ", "romaji": "sha", "type": "hiragana", "group": "yoon", "order": 73, "isYoon": true },
+  { "id": "hiragana-shu", "kana": "しゅ", "romaji": "shu", "type": "hiragana", "group": "yoon", "order": 74, "isYoon": true },
+  { "id": "hiragana-sho", "kana": "しょ", "romaji": "sho", "type": "hiragana", "group": "yoon", "order": 75, "isYoon": true },
+
+  { "id": "hiragana-cha", "kana": "ちゃ", "romaji": "cha", "type": "hiragana", "group": "yoon", "order": 76, "isYoon": true },
+  { "id": "hiragana-chu", "kana": "ちゅ", "romaji": "chu", "type": "hiragana", "group": "yoon", "order": 77, "isYoon": true },
+  { "id": "hiragana-cho", "kana": "ちょ", "romaji": "cho", "type": "hiragana", "group": "yoon", "order": 78, "isYoon": true },
+
+  { "id": "hiragana-nya", "kana": "にゃ", "romaji": "nya", "type": "hiragana", "group": "yoon", "order": 79, "isYoon": true },
+  { "id": "hiragana-nyu", "kana": "にゅ", "romaji": "nyu", "type": "hiragana", "group": "yoon", "order": 80, "isYoon": true },
+  { "id": "hiragana-nyo", "kana": "にょ", "romaji": "nyo", "type": "hiragana", "group": "yoon", "order": 81, "isYoon": true },
+
+  { "id": "hiragana-hya", "kana": "ひゃ", "romaji": "hya", "type": "hiragana", "group": "yoon", "order": 82, "isYoon": true },
+  { "id": "hiragana-hyu", "kana": "ひゅ", "romaji": "hyu", "type": "hiragana", "group": "yoon", "order": 83, "isYoon": true },
+  { "id": "hiragana-hyo", "kana": "ひょ", "romaji": "hyo", "type": "hiragana", "group": "yoon", "order": 84, "isYoon": true },
+
+  { "id": "hiragana-mya", "kana": "みゃ", "romaji": "mya", "type": "hiragana", "group": "yoon", "order": 85, "isYoon": true },
+  { "id": "hiragana-myu", "kana": "みゅ", "romaji": "myu", "type": "hiragana", "group": "yoon", "order": 86, "isYoon": true },
+  { "id": "hiragana-myo", "kana": "みょ", "romaji": "myo", "type": "hiragana", "group": "yoon", "order": 87, "isYoon": true },
+
+  { "id": "hiragana-rya", "kana": "りゃ", "romaji": "rya", "type": "hiragana", "group": "yoon", "order": 88, "isYoon": true },
+  { "id": "hiragana-ryu", "kana": "りゅ", "romaji": "ryu", "type": "hiragana", "group": "yoon", "order": 89, "isYoon": true },
+  { "id": "hiragana-ryo", "kana": "りょ", "romaji": "ryo", "type": "hiragana", "group": "yoon", "order": 90, "isYoon": true },
+
+  { "id": "hiragana-gya", "kana": "ぎゃ", "romaji": "gya", "type": "hiragana", "group": "yoon", "order": 91, "isYoon": true, "isDakuten": true },
+  { "id": "hiragana-gyu", "kana": "ぎゅ", "romaji": "gyu", "type": "hiragana", "group": "yoon", "order": 92, "isYoon": true, "isDakuten": true },
+  { "id": "hiragana-gyo", "kana": "ぎょ", "romaji": "gyo", "type": "hiragana", "group": "yoon", "order": 93, "isYoon": true, "isDakuten": true },
+
+  { "id": "hiragana-ja", "kana": "じゃ", "romaji": "ja", "type": "hiragana", "group": "yoon", "order": 94, "isYoon": true, "isDakuten": true },
+  { "id": "hiragana-ju", "kana": "じゅ", "romaji": "ju", "type": "hiragana", "group": "yoon", "order": 95, "isYoon": true, "isDakuten": true },
+  { "id": "hiragana-jo", "kana": "じょ", "romaji": "jo", "type": "hiragana", "group": "yoon", "order": 96, "isYoon": true, "isDakuten": true },
+
+  { "id": "hiragana-bya", "kana": "びゃ", "romaji": "bya", "type": "hiragana", "group": "yoon", "order": 97, "isYoon": true, "isDakuten": true },
+  { "id": "hiragana-byu", "kana": "びゅ", "romaji": "byu", "type": "hiragana", "group": "yoon", "order": 98, "isYoon": true, "isDakuten": true },
+  { "id": "hiragana-byo", "kana": "びょ", "romaji": "byo", "type": "hiragana", "group": "yoon", "order": 99, "isYoon": true, "isDakuten": true },
+
+  { "id": "hiragana-pya", "kana": "ぴゃ", "romaji": "pya", "type": "hiragana", "group": "yoon", "order": 100, "isYoon": true, "isHandakuten": true },
+  { "id": "hiragana-pyu", "kana": "ぴゅ", "romaji": "pyu", "type": "hiragana", "group": "yoon", "order": 101, "isYoon": true, "isHandakuten": true },
+  { "id": "hiragana-pyo", "kana": "ぴょ", "romaji": "pyo", "type": "hiragana", "group": "yoon", "order": 102, "isYoon": true, "isHandakuten": true }
+]

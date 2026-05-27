@@ -547,7 +547,7 @@ Kitakana/
 │   │   ├── package.json
 │   │   └── tsconfig.json
 │   │
-│   ├── data/
+│   ├── content/
 │   │   ├── src/
 │   │   │   ├── kana/
 │   │   │   │   ├── hiragana.json
@@ -640,7 +640,7 @@ Responsibilities:
 
 ---
 
-### 14.3 `packages/data`
+### 14.3 `packages/content`
 
 Static learning content.
 

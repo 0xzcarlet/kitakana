@@ -43,23 +43,24 @@ Perintah root lain yang tersedia:
 pnpm build
 pnpm start
 pnpm lint
+pnpm test
+pnpm test:e2e
 pnpm typecheck
 ```
 
-## Packages Roadmap
+## Packages
 
-Folder `packages/` disiapkan untuk modul shared yang akan diekstrak saat boundary-nya sudah jelas. Jangan memecah code terlalu cepat; selama logic masih spesifik ke `apps/web`, biarkan tetap tinggal di app.
+Folder `packages/` berisi modul shared yang boundary-nya sudah jelas. Logic yang masih spesifik ke route tetap tinggal di `apps/web` sampai pattern reuse-nya matang.
 
 ### `packages/content`
 
 Dipakai untuk semua hal yang berhubungan dengan materi belajar:
 
 - schema TypeScript untuk kana, vocabulary, dan metadata belajar
-- loader atau parsing JSON
+- JSON kana data
+- loader dan parsing JSON
 - validator dataset
-- helper untuk filtering level, tag, atau locale
-
-Tambahkan package ini saat dataset mulai berkembang dan perlu dipakai di lebih dari satu feature atau app.
+- helper untuk filtering type, group, level, tag, atau locale
 
 ### `packages/core`
 
@@ -92,3 +93,7 @@ Folder ini disiapkan untuk shared tooling config ketika monorepo mulai bertambah
 - script atau preset build yang dipakai lebih dari satu workspace
 
 Saat ini folder ini sengaja masih tipis supaya setup tetap sederhana.
+
+## Storage Note
+
+Persistence untuk learned kana, quiz history, dan progress lokal akan masuk ke slice berikutnya menggunakan IndexedDB/Dexie sesuai PRD. Slice kana v0.2 ini fokus pada JSON content, quiz logic, dan integrasi web tanpa backend atau login.
