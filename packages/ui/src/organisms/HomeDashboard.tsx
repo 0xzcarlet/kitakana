@@ -1,122 +1,124 @@
-import { Card, ProgressBar } from "../atoms";
-import {
-  RecentActivityItem,
-  ReviewPromptCard,
-  ShortcutCard,
-  StatCard,
-} from "../molecules";
+import { Card } from "../atoms";
 
-const activities = [
-  {
-    detail: "8 kartu direview dengan akurasi stabil",
-    kana: "水",
-    time: "Hari ini",
-    title: "Kosakata N5",
-  },
-  {
-    detail: "Latihan membaca baris a, ka, sa",
-    kana: "あ",
-    time: "Kemarin",
-    title: "Hiragana dasar",
-  },
-  {
-    detail: "Mulai mengenal bentuk katakana",
-    kana: "ア",
-    time: "2 hari",
-    title: "Katakana awal",
-  },
-];
+export type HomeDashboardStats = {
+  accuracy: number | null;
+  correctAnswers: number;
+  sessionsCount: number;
+  streakDays: number;
+  totalAnswers: number;
+};
 
-export function HomeDashboard() {
+export type HomeDashboardProps = {
+  isLoading?: boolean;
+  stats?: HomeDashboardStats;
+};
+
+const emptyStats: HomeDashboardStats = {
+  accuracy: null,
+  correctAnswers: 0,
+  sessionsCount: 0,
+  streakDays: 0,
+  totalAnswers: 0,
+};
+
+export function HomeDashboard({
+  isLoading = false,
+  stats = emptyStats,
+}: HomeDashboardProps) {
+  const streakValue = isLoading ? "Memuat" : `${stats.streakDays} hari`;
+  const accuracyValue = isLoading
+    ? "Memuat"
+    : stats.accuracy === null
+      ? "Belum ada"
+      : `${stats.accuracy}%`;
+
   return (
-    <div className="min-w-0 space-y-6">
-      <ReviewPromptCard dueCount={12} />
-
+    <div className="min-w-0">
       <section
-        aria-label="Ringkasan progress hari ini"
-        className="grid min-w-0 gap-4 md:grid-cols-3"
+        aria-label="Ringkasan belajar lokal"
+        className="grid min-w-0 gap-4 lg:grid-cols-[0.9fr_1.2fr_0.9fr]"
       >
-        <StatCard
-          detail="Ritme kecil yang konsisten lebih kuat dari sesi panjang."
-          label="Kartu direview"
-          progress={72}
-          symbol="復"
-          value="8"
-        />
-        <StatCard
-          detail="Jawaban benar dari sesi terakhir."
-          label="Akurasi"
-          progress={85}
-          symbol="正"
-          tone="sun"
-          value="85%"
-        />
-        <StatCard
-          detail="Belajar berturut-turut tanpa putus."
-          label="Streak"
-          progress={60}
-          symbol="日"
+        <Card
+          className="flex min-h-60 flex-col justify-between"
+          data-testid="home-streak-card"
           tone="aqua"
-          value="3 hari"
-        />
-      </section>
-
-      <section className="grid min-w-0 gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-        <Card className="space-y-5" tone="paper">
+        >
           <div className="flex items-start justify-between gap-4">
-            <div>
-              <h2
-                className="font-display text-2xl font-extrabold text-text"
-                id="today-progress"
-              >
-                Progress hari ini
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-text-muted">
-                Lihat latihan yang sudah kamu jalani hari ini.
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-text-muted">
+                Streak days
+              </p>
+              <p className="mt-4 break-words font-display text-4xl font-extrabold leading-none text-text">
+                {streakValue}
               </p>
             </div>
-            <span className="hidden rounded-[1.5rem] bg-bg-soft px-5 py-3 font-display text-4xl font-extrabold text-text sm:block">
-              学校
+            <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-bg-soft font-display text-2xl font-extrabold text-text">
+              日
             </span>
           </div>
+          <p className="text-sm leading-6 text-text-muted">
+            {stats.streakDays > 0
+              ? `Kamu belajar ${stats.streakDays} hari berturut-turut.`
+              : "Belum ada sesi hari ini. Mulai satu latihan kecil untuk menyalakan streak."}
+          </p>
+        </Card>
 
-          <div className="grid min-w-0 gap-5 sm:grid-cols-2">
-            <ProgressBar label="Progress kana" value={42} />
-            <ProgressBar label="Kosakata N5" value={28} />
+        <Card
+          className="relative flex min-h-60 flex-col justify-between overflow-hidden"
+          data-testid="home-kana-cta-card"
+          tone="sun"
+        >
+          <div className="absolute -right-5 -top-8 font-display text-[8rem] font-extrabold leading-none text-white/35">
+            あ
           </div>
-
-          <div className="grid min-w-0 gap-3 sm:grid-cols-2">
-            <ShortcutCard
-              description="Lihat tabel kana dan pelajari bentuk dasar dengan romaji."
-              href="/kana"
-              kana="あ"
-              title="Hiragana"
-              tone="aqua"
-            />
-            <ShortcutCard
-              description="Latih pengenalan bentuk katakana secara ringan."
-              href="/quiz"
-              kana="ア"
-              title="Kuis katakana"
-              tone="sun"
-            />
+          <div className="relative max-w-xl">
+            <p className="text-sm font-semibold text-text-muted">
+              Belajar Kana
+            </p>
+            <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-text sm:text-5xl">
+              Lanjutkan latihan hiragana dan katakana.
+            </h2>
+            <p className="mt-4 text-sm leading-6 text-text-muted">
+              Pilih bagian kecil, jawab beberapa soal, lalu progress tersimpan
+              lokal di perangkat ini.
+            </p>
+          </div>
+          <div className="relative mt-7 flex">
+            <a
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-text px-5 py-3 font-display text-sm font-bold text-bg-soft transition hover:bg-text/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+              href="/kana/practice"
+            >
+              Mulai latihan
+            </a>
           </div>
         </Card>
 
-        <Card className="space-y-4" tone="paper">
+        <Card
+          className="flex min-h-60 flex-col justify-between"
+          data-testid="home-accuracy-card"
+          tone="paper"
+        >
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-text-muted">Akurasi</p>
+              <p className="mt-4 break-words font-display text-4xl font-extrabold leading-none text-text">
+                {accuracyValue}
+              </p>
+            </div>
+            <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-bg-soft font-display text-2xl font-extrabold text-text">
+              正
+            </span>
+          </div>
           <div>
-            <h2 className="font-display text-2xl font-extrabold text-text">
-              Aktivitas terbaru
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-text-muted">
-              Jejak belajar sederhana supaya kamu tahu harus lanjut dari mana.
+            <p className="text-sm leading-6 text-text-muted">
+              {stats.totalAnswers > 0
+                ? `${stats.correctAnswers}/${stats.totalAnswers} jawaban benar.`
+                : "Selesaikan kuis untuk melihat akurasi lokal."}
+            </p>
+            <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-text-muted">
+              {stats.sessionsCount} sesi tersimpan
             </p>
           </div>
-          <ul className="space-y-3">
-            {activities.map((activity) => (
-              <RecentActivityItem key={activity.title} {...activity} />
-            ))}
-          </ul>
         </Card>
       </section>
     </div>

@@ -9,7 +9,8 @@ export function MobileBottomNav({ activeHref = "/" }: MobileBottomNavProps) {
   return (
     <nav
       aria-label="Mobile navigation"
-      className="fixed inset-x-3 bottom-3 z-40 rounded-[2rem] border border-border bg-card/95 px-2 py-2 shadow-[0_20px_50px_rgba(79,37,46,0.18)] backdrop-blur lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-card px-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] pt-2 lg:hidden"
+      data-testid="mobile-bottom-nav"
     >
       <div className="grid grid-cols-5 gap-1">
         {mainNavigation.map((item) => {

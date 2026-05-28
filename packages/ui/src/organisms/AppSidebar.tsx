@@ -10,9 +10,10 @@ export function AppSidebar({ activeHref = "/", className }: AppSidebarProps) {
   return (
     <aside
       className={cx(
-        "hidden min-h-screen w-72 shrink-0 border-r border-border/80 bg-bg-soft/70 px-5 py-6 backdrop-blur lg:flex lg:flex-col",
+        "fixed inset-y-0 left-0 hidden h-dvh w-72 shrink-0 overflow-y-auto border-r border-border/80 bg-bg-soft/70 px-5 py-6 backdrop-blur lg:flex lg:flex-col",
         className,
       )}
+      data-testid="app-sidebar"
     >
       <a
         className="flex items-center gap-3 rounded-3xl p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
