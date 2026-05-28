@@ -195,7 +195,7 @@ export function QuizPanel({
           disabled={typingState !== "idle"}
         />
       ) : (
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <div className="grid grid-cols-2 gap-2 sm:gap-3">
           {question.options.map((option) => (
             <QuizOption
               key={`${question.sourceId}-${option.label}`}

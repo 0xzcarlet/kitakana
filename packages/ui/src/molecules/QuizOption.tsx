@@ -31,7 +31,7 @@ export function QuizOption({
       type="button"
       disabled={state === "disabled" || props.disabled}
       className={cx(
-        "flex min-h-14 w-full items-center justify-center gap-2 rounded-2xl border px-4 py-3 text-base font-semibold transition duration-150",
+        "flex min-h-12 w-full items-center justify-center gap-2 rounded-xl border px-3 py-2 text-sm font-semibold transition duration-150 sm:min-h-14 sm:rounded-2xl sm:px-4 sm:py-3 sm:text-base",
         "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
         stateClasses[state],
         className,

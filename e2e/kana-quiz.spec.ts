@@ -69,6 +69,31 @@ test("quiz page advances with Enter after choosing an option", async ({ page }) 
   );
 });
 
+test("quiz options stay in a two-column grid on mobile", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/quiz");
+
+  await expect(page.getByTestId("quiz-panel")).toBeVisible();
+  await expect(page.getByTestId("quiz-option")).toHaveCount(4);
+
+  const boxes = await page.getByTestId("quiz-option").evaluateAll((options) =>
+    options.map((option) => {
+      const rect = option.getBoundingClientRect();
+      return {
+        x: Math.round(rect.x),
+        y: Math.round(rect.y),
+      };
+    }),
+  );
+
+  expect(boxes[1].x).toBeGreaterThan(boxes[0].x);
+  expect(Math.abs(boxes[1].y - boxes[0].y)).toBeLessThanOrEqual(2);
+  expect(Math.abs(boxes[2].x - boxes[0].x)).toBeLessThanOrEqual(2);
+  expect(boxes[2].y).toBeGreaterThan(boxes[0].y);
+  expect(Math.abs(boxes[3].x - boxes[1].x)).toBeLessThanOrEqual(2);
+  expect(Math.abs(boxes[3].y - boxes[2].y)).toBeLessThanOrEqual(2);
+});
+
 test("practice page works with multiple-choice engine", async ({ page }) => {
   await page.goto("/kana/practice");
 
