@@ -3,8 +3,8 @@ import { FeaturePage } from "@/components/FeaturePage";
 export default function SettingsPage() {
   return (
     <FeaturePage
-      badge="Settings"
-      description="Atur preferensi belajar, mode latihan, dan penyimpanan progress lokal."
+      badge="Pengaturan"
+      description="Atur preferensi belajar dan mode latihan."
       kana="設"
       title="Pengaturan"
     />

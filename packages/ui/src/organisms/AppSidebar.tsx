@@ -26,7 +26,7 @@ export function AppSidebar({ activeHref = "/", className }: AppSidebarProps) {
             Kitakana
           </span>
           <span className="mt-1 block text-xs font-semibold text-text-muted">
-            Japanese learning PWA
+            Belajar bahasa Jepang
           </span>
         </span>
       </a>

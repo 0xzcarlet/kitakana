@@ -60,7 +60,7 @@ export function QuizPanel({
           Belum ada soal
         </p>
         <p className="text-sm leading-6 text-text-muted">
-          Quiz tidak dapat dimulai karena dataset kana kosong.
+          Kuis belum bisa dimulai karena daftar kana masih kosong.
         </p>
       </Card>
     );
@@ -85,7 +85,7 @@ export function QuizPanel({
         </p>
         <div className="flex justify-center pt-2">
           <Button data-testid="quiz-restart" onClick={onRestart}>
-            Ulangi quiz
+            Ulangi kuis
           </Button>
         </div>
       </Card>

@@ -32,11 +32,10 @@ export function FeaturePage({
 
       <Card className="space-y-3">
         <p className="font-display text-2xl font-extrabold text-text">
-          Coming soon
+          Segera hadir
         </p>
         <p className="text-sm leading-6 text-text-muted">
-          Halaman ini sudah siap untuk route dan navigasi. Konten interaktifnya
-          bisa kita isi bertahap.
+          Bagian ini sedang disiapkan agar latihanmu makin lengkap.
         </p>
       </Card>
     </section>

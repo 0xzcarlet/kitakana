@@ -72,8 +72,7 @@ export function HomeDashboard() {
                 Progress hari ini
               </h2>
               <p className="mt-2 text-sm leading-6 text-text-muted">
-                Ringkasan awal ini masih static, nanti akan tersambung ke
-                progress lokal.
+                Lihat latihan yang sudah kamu jalani hari ini.
               </p>
             </div>
             <span className="hidden rounded-[1.5rem] bg-bg-soft px-5 py-3 font-display text-4xl font-extrabold text-text sm:block">
@@ -82,13 +81,13 @@ export function HomeDashboard() {
           </div>
 
           <div className="grid min-w-0 gap-5 sm:grid-cols-2">
-            <ProgressBar label="Kana progress" value={42} />
+            <ProgressBar label="Progress kana" value={42} />
             <ProgressBar label="Kosakata N5" value={28} />
           </div>
 
           <div className="grid min-w-0 gap-3 sm:grid-cols-2">
             <ShortcutCard
-              description="Buka chart dan pelajari bentuk dasar dengan romaji."
+              description="Lihat tabel kana dan pelajari bentuk dasar dengan romaji."
               href="/kana"
               kana="あ"
               title="Hiragana"
@@ -98,7 +97,7 @@ export function HomeDashboard() {
               description="Latih pengenalan bentuk katakana secara ringan."
               href="/quiz"
               kana="ア"
-              title="Katakana quiz"
+              title="Kuis katakana"
               tone="sun"
             />
           </div>

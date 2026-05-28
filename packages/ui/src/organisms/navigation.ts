@@ -5,9 +5,9 @@ export type NavigationItem = {
 };
 
 export const mainNavigation: NavigationItem[] = [
-  { href: "/", kana: "家", label: "Home" },
+  { href: "/", kana: "家", label: "Beranda" },
   { href: "/kana", kana: "あ", label: "Kana" },
-  { href: "/quiz", kana: "問", label: "Quiz" },
+  { href: "/quiz", kana: "問", label: "Kuis" },
   { href: "/review", kana: "復", label: "Review" },
-  { href: "/settings", kana: "設", label: "Settings" },
+  { href: "/settings", kana: "設", label: "Pengaturan" },
 ];

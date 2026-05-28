@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Kitakana",
-  description: "Open-source Japanese learning PWA.",
+  description: "Belajar bahasa Jepang dari kana dan kosakata dasar.",
 };
 
 export default function RootLayout({
