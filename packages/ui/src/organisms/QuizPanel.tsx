@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { Badge } from "../atoms/Badge";
 import { Button } from "../atoms/Button";
 import { Card } from "../atoms/Card";
@@ -70,6 +71,30 @@ export function QuizPanel({
   typingState = "idle",
   correctAnswer = "",
 }: QuizPanelProps) {
+  useEffect(() => {
+    if (!showNext || isFinished) return;
+
+    const handleEnterNext = (event: KeyboardEvent) => {
+      if (event.key !== "Enter" || event.repeat || event.isComposing) return;
+
+      const target = event.target;
+      if (target instanceof HTMLTextAreaElement) return;
+      if (
+        engine === "typing" &&
+        target instanceof HTMLInputElement &&
+        !target.disabled
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      onNext();
+    };
+
+    window.addEventListener("keydown", handleEnterNext, true);
+    return () => window.removeEventListener("keydown", handleEnterNext, true);
+  }, [engine, isFinished, onNext, showNext, typingState]);
+
   if (total === 0 || !question) {
     return (
       <Card className="space-y-3">
@@ -183,7 +208,14 @@ export function QuizPanel({
       )}
 
       {showNext && (
-        <div className="flex justify-end">
+        <div className="flex flex-wrap items-center justify-end gap-3">
+          <p className="text-xs font-medium text-text-muted">
+            Tekan{" "}
+            <kbd className="rounded-md border border-border bg-card px-1.5 py-0.5 text-[11px] font-bold text-text">
+              Enter
+            </kbd>{" "}
+            untuk soal berikutnya
+          </p>
           <Button data-testid="quiz-next" onClick={onNext}>
             {nextLabel}
           </Button>
