@@ -85,6 +85,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@kitakana/content':
+        specifier: workspace:*
+        version: link:../content
       react:
         specifier: ^19.0.0
         version: 19.2.4

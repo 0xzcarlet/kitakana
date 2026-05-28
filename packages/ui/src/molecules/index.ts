@@ -1,3 +1,4 @@
+export * from "./KanaGroupCard";
 export * from "./KanaTile";
 export * from "./QuizOption";
 export * from "./RecentActivityItem";

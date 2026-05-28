@@ -1,4 +1,5 @@
 import type { KanaGroup, KanaItem, KanaType } from "../types";
+export type { KanaGroup } from "../types";
 import hiraganaRaw from "./hiragana.json";
 import katakanaRaw from "./katakana.json";
 
@@ -95,3 +96,31 @@ export function getKanaByGroup(
 ): KanaItem[] {
   return getKanaByType(type).filter((item) => item.group === group);
 }
+
+/**
+ * Metadata for each kana group used to build the practice section selector UI.
+ */
+export type KanaGroupMeta = {
+  group: KanaGroup;
+  /** Human-readable label shown in the group card. */
+  label: string;
+  /** Controls rendering order in the UI. */
+  displayOrder: number;
+};
+
+export const KANA_GROUP_META: KanaGroupMeta[] = [
+  { group: "vowel",      label: "A I U E O",          displayOrder: 1 },
+  { group: "k",          label: "Ka Ki Ku Ke Ko",      displayOrder: 2 },
+  { group: "s",          label: "Sa Shi Su Se So",     displayOrder: 3 },
+  { group: "t",          label: "Ta Chi Tsu Te To",    displayOrder: 4 },
+  { group: "n",          label: "Na Ni Nu Ne No",      displayOrder: 5 },
+  { group: "h",          label: "Ha Hi Fu He Ho",      displayOrder: 6 },
+  { group: "m",          label: "Ma Mi Mu Me Mo",      displayOrder: 7 },
+  { group: "y",          label: "Ya Yu Yo",            displayOrder: 8 },
+  { group: "r",          label: "Ra Ri Ru Re Ro",      displayOrder: 9 },
+  { group: "w",          label: "Wa Wo",               displayOrder: 10 },
+  { group: "n-special",  label: "N (ん / ン)",         displayOrder: 11 },
+  { group: "dakuten",    label: "Dakuten (voiced)",    displayOrder: 12 },
+  { group: "handakuten", label: "Handakuten (ぱ row)", displayOrder: 13 },
+  { group: "yoon",       label: "Yoon (combined)",     displayOrder: 14 },
+];

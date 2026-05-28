@@ -1,5 +1,6 @@
 export type { KanaGroup, KanaItem, KanaType } from "./types";
 export {
+  KANA_GROUP_META,
   getKanaByGroup,
   getKanaById,
   getKanaByType,
@@ -7,3 +8,4 @@ export {
   katakana,
   parseKana,
 } from "./kana";
+export type { KanaGroupMeta } from "./kana";

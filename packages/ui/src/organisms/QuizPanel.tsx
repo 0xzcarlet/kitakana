@@ -107,7 +107,24 @@ export function QuizPanel({
         <ProgressBar value={progressValue} />
       </Card>
 
-      <Card className="flex flex-col items-center gap-6 py-10" tone="aqua">
+      <Card
+        className="flex flex-col items-center gap-6 py-10 transition-all duration-200"
+        tone={
+          question.options.some((o) => o.state === "wrong")
+            ? undefined
+            : "aqua"
+        }
+        style={
+          question.options.some((o) => o.state === "wrong")
+            ? {
+                background: "rgb(239 68 68 / 0.15)",
+                borderColor: "rgb(220 38 38)",
+                borderWidth: "2px",
+                boxShadow: "0 0 0 4px rgb(220 38 38 / 0.2), 0 20px 50px rgb(220 38 38 / 0.15)",
+              }
+            : undefined
+        }
+      >
         <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
           Apa bacaan kana ini?
         </p>
