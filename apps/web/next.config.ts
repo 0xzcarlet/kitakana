@@ -6,7 +6,12 @@ const configDir = dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
-  transpilePackages: ["@kitakana/ui", "@kitakana/content", "@kitakana/core"],
+  transpilePackages: [
+    "@kitakana/ui",
+    "@kitakana/content",
+    "@kitakana/core",
+    "@kitakana/storage",
+  ],
   turbopack: {
     root: resolve(configDir, "../.."),
   },

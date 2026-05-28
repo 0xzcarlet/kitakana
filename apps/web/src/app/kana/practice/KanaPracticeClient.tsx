@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { KanaItem, KanaType, KanaGroupMeta } from "@kitakana/content";
 import {
   generateKanaQuiz,
@@ -9,6 +9,7 @@ import {
   type QuizEngine,
   type QuizQuestion,
 } from "@kitakana/core";
+import { recordLearningSession } from "@kitakana/storage";
 import {
   KanaGroupSelector,
   QuizPanel,
@@ -64,6 +65,7 @@ export function KanaPracticeClient({
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [typingState, setTypingState] = useState<"idle" | "correct" | "wrong">("idle");
+  const hasRecordedResult = useRef(false);
 
   // ── Setup handlers ──────────────────────────────────────────────────────────
   const allGroupIds = useMemo(() => groups.map((g) => g.group), [groups]);
@@ -120,6 +122,7 @@ export function KanaPracticeClient({
     setAnswers([]);
     setShowResult(false);
     setTypingState("idle");
+    hasRecordedResult.current = false;
     setPhase("quiz");
   };
 
@@ -154,6 +157,20 @@ export function KanaPracticeClient({
         })),
       }
     : null;
+
+  useEffect(() => {
+    if (!showResult || total === 0 || hasRecordedResult.current) return;
+
+    hasRecordedResult.current = true;
+    recordLearningSession({
+      correct: summary.correct,
+      engine,
+      source: "practice",
+      total: summary.total,
+    }).catch((error: unknown) => {
+      console.error("Failed to record local practice session.", error);
+    });
+  }, [engine, showResult, summary.correct, summary.total, total]);
 
   const handleSelectOption = (option: string) => {
     if (!currentQuestion || selected !== null || showResult) return;
@@ -205,6 +222,7 @@ export function KanaPracticeClient({
     setAnswers([]);
     setShowResult(false);
     setTypingState("idle");
+    hasRecordedResult.current = false;
   };
 
   const handleBackToSetup = () => {
@@ -215,6 +233,7 @@ export function KanaPracticeClient({
     setAnswers([]);
     setShowResult(false);
     setTypingState("idle");
+    hasRecordedResult.current = false;
   };
 
   // ── Render ──────────────────────────────────────────────────────────────────

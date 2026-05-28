@@ -1,4 +1,141 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
+
+async function completeMultipleChoiceQuiz(page: Page) {
+  for (let step = 0; step < 10; step++) {
+    await page.getByTestId("quiz-option").first().click();
+    await expect(page.getByTestId("quiz-next")).toBeVisible();
+    await page.getByTestId("quiz-next").click();
+
+    if (await page.getByTestId("quiz-result").isVisible()) {
+      return;
+    }
+  }
+
+  await expect(page.getByTestId("quiz-result")).toBeVisible();
+}
+
+async function getLearningSessionCount(page: Page): Promise<number> {
+  return page.evaluate(
+    () =>
+      new Promise<number>((resolve) => {
+        const request = indexedDB.open("kitakana-local");
+
+        request.onerror = () => resolve(0);
+        request.onsuccess = () => {
+          const db = request.result;
+
+          if (!db.objectStoreNames.contains("learningSessions")) {
+            db.close();
+            resolve(0);
+            return;
+          }
+
+          const transaction = db.transaction("learningSessions", "readonly");
+          const countRequest = transaction
+            .objectStore("learningSessions")
+            .count();
+
+          countRequest.onerror = () => {
+            db.close();
+            resolve(0);
+          };
+          countRequest.onsuccess = () => {
+            const count = countRequest.result;
+            db.close();
+            resolve(count);
+          };
+        };
+      }),
+  );
+}
+
+test("home dashboard renders only the local learning cards", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(page.getByTestId("home-streak-card")).toBeVisible();
+  await expect(page.getByTestId("home-kana-cta-card")).toBeVisible();
+  await expect(page.getByTestId("home-accuracy-card")).toBeVisible();
+  await expect(page.locator("[data-testid^='home-'][data-testid$='-card']")).toHaveCount(3);
+
+  await expect(page.getByTestId("home-streak-card")).toContainText("0 hari");
+  await expect(page.getByTestId("home-accuracy-card")).toContainText("Belum ada");
+  await expect(page.getByText("Review hari ini")).toHaveCount(0);
+  await expect(page.getByText("Progress hari ini")).toHaveCount(0);
+  await expect(page.getByText("Aktivitas terbaru")).toHaveCount(0);
+});
+
+test("home dashboard reads local streak and accuracy after a quiz", async ({
+  page,
+}) => {
+  await page.goto("/quiz");
+
+  await expect(page.getByTestId("quiz-panel")).toBeVisible();
+  await completeMultipleChoiceQuiz(page);
+  await expect(page.getByTestId("quiz-result")).toBeVisible();
+  await expect
+    .poll(() => getLearningSessionCount(page), { timeout: 5_000 })
+    .toBeGreaterThan(0);
+
+  await page.goto("/");
+
+  await expect(page.getByTestId("home-streak-card")).toContainText("1 hari");
+  await expect(page.getByTestId("home-accuracy-card")).toContainText(/\d+%/);
+  await expect(page.getByTestId("home-accuracy-card")).toContainText(
+    /\/10 jawaban benar/,
+  );
+});
+
+test("desktop sidebar stays pinned while content scrolls", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto("/kana");
+
+  const sidebar = page.getByTestId("app-sidebar");
+  await expect(sidebar).toBeVisible();
+  await expect
+    .poll(() =>
+      sidebar.evaluate((element) =>
+        Math.round(element.getBoundingClientRect().top),
+      ),
+    )
+    .toBe(0);
+
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await expect
+    .poll(() => page.evaluate(() => window.scrollY), { timeout: 5_000 })
+    .toBeGreaterThan(100);
+  await expect
+    .poll(() =>
+      sidebar.evaluate((element) =>
+        Math.round(element.getBoundingClientRect().top),
+      ),
+    )
+    .toBe(0);
+});
+
+test("mobile bottom nav is solid and full width", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+
+  const nav = page.getByTestId("mobile-bottom-nav");
+  await expect(nav).toBeVisible();
+
+  const metrics = await nav.evaluate((element) => {
+    const rect = element.getBoundingClientRect();
+    const style = window.getComputedStyle(element);
+
+    return {
+      bottom: Math.round(window.innerHeight - rect.bottom),
+      left: Math.round(rect.left),
+      radius: style.borderRadius,
+      width: Math.round(rect.width),
+    };
+  });
+
+  expect(metrics.left).toBe(0);
+  expect(metrics.bottom).toBe(0);
+  expect(metrics.radius).toBe("0px");
+  expect(metrics.width).toBeGreaterThanOrEqual(389);
+});
 
 test("kana page renders the chart and toggles kana type", async ({ page }) => {
   await page.goto("/kana");

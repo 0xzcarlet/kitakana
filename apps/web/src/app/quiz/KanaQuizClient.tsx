@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { KanaItem } from "@kitakana/content";
 import {
   generateKanaQuiz,
@@ -8,6 +8,7 @@ import {
   type QuizAnswer,
   type QuizQuestion,
 } from "@kitakana/core";
+import { recordLearningSession } from "@kitakana/storage";
 import {
   QuizPanel,
   type QuizPanelOption,
@@ -40,6 +41,7 @@ export function KanaQuizClient({ items }: KanaQuizClientProps) {
   const [selected, setSelected] = useState<string | null>(null);
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
   const [showResult, setShowResult] = useState(false);
+  const hasRecordedResult = useRef(false);
 
   const total = questions.length;
   const currentQuestion = questions[currentIndex] ?? null;
@@ -72,6 +74,20 @@ export function KanaQuizClient({ items }: KanaQuizClientProps) {
       }
     : null;
 
+  useEffect(() => {
+    if (!showResult || total === 0 || hasRecordedResult.current) return;
+
+    hasRecordedResult.current = true;
+    recordLearningSession({
+      correct: summary.correct,
+      engine: "multiple-choice",
+      source: "quiz",
+      total: summary.total,
+    }).catch((error: unknown) => {
+      console.error("Failed to record local quiz session.", error);
+    });
+  }, [showResult, summary.correct, summary.total, total]);
+
   const handleSelectOption = (option: string) => {
     if (!currentQuestion || selected !== null || showResult) return;
 
@@ -101,6 +117,7 @@ export function KanaQuizClient({ items }: KanaQuizClientProps) {
     setSelected(null);
     setAnswers([]);
     setShowResult(false);
+    hasRecordedResult.current = false;
   };
 
   return (

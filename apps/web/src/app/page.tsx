@@ -1,5 +1,5 @@
-import { HomeDashboard } from "@kitakana/ui";
+import { HomeDashboardClient } from "./HomeDashboardClient";
 
 export default function Home() {
-  return <HomeDashboard />;
+  return <HomeDashboardClient />;
 }

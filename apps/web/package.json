@@ -12,6 +12,7 @@
   "dependencies": {
     "@kitakana/content": "workspace:*",
     "@kitakana/core": "workspace:*",
+    "@kitakana/storage": "workspace:*",
     "@kitakana/ui": "workspace:*",
     "next": "16.2.6",
     "react": "19.2.4",
