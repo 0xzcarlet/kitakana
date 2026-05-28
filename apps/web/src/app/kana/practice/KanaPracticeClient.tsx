@@ -6,6 +6,7 @@ import {
   generateKanaQuiz,
   summarizeQuiz,
   type QuizAnswer,
+  type QuizEngine,
   type QuizQuestion,
 } from "@kitakana/core";
 import {
@@ -53,6 +54,7 @@ export function KanaPracticeClient({
   const [selectedTypes, setSelectedTypes] = useState<Set<KanaType>>(
     () => new Set<KanaType>(["hiragana"]),
   );
+  const [engine, setEngine] = useState<QuizEngine>("multiple-choice");
 
   // ── Quiz phase state ────────────────────────────────────────────────────────
   const [phase, setPhase] = useState<Phase>("setup");
@@ -61,6 +63,7 @@ export function KanaPracticeClient({
   const [selected, setSelected] = useState<string | null>(null);
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
   const [showResult, setShowResult] = useState(false);
+  const [typingState, setTypingState] = useState<"idle" | "correct" | "wrong">("idle");
 
   // ── Setup handlers ──────────────────────────────────────────────────────────
   const allGroupIds = useMemo(() => groups.map((g) => g.group), [groups]);
@@ -108,6 +111,7 @@ export function KanaPracticeClient({
     const newQuestions = generateKanaQuiz(pool, {
       count: 10,
       mode: "kana-to-romaji",
+      engine,
       seed: Date.now(),
     });
     setQuestions(newQuestions);
@@ -115,6 +119,7 @@ export function KanaPracticeClient({
     setSelected(null);
     setAnswers([]);
     setShowResult(false);
+    setTypingState("idle");
     setPhase("quiz");
   };
 
@@ -165,7 +170,19 @@ export function KanaPracticeClient({
       return;
     }
     setSelected(null);
+    setTypingState("idle");
     setCurrentIndex((i) => Math.min(i + 1, total - 1));
+  };
+
+  const handleSubmitTyping = (answer: string) => {
+    if (!currentQuestion || typingState !== "idle") return;
+    const normalized = answer.trim().toLowerCase();
+    const isCorrect = normalized === currentQuestion.correctAnswer.toLowerCase();
+    setTypingState(isCorrect ? "correct" : "wrong");
+    setAnswers((prev) => [
+      ...prev,
+      { questionId: currentQuestion.id, answer: normalized },
+    ]);
   };
 
   const handleRestart = () => {
@@ -179,6 +196,7 @@ export function KanaPracticeClient({
     const newQuestions = generateKanaQuiz(pool, {
       count: 10,
       mode: "kana-to-romaji",
+      engine,
       seed: Date.now(),
     });
     setQuestions(newQuestions);
@@ -186,6 +204,7 @@ export function KanaPracticeClient({
     setSelected(null);
     setAnswers([]);
     setShowResult(false);
+    setTypingState("idle");
   };
 
   const handleBackToSetup = () => {
@@ -195,6 +214,7 @@ export function KanaPracticeClient({
     setSelected(null);
     setAnswers([]);
     setShowResult(false);
+    setTypingState("idle");
   };
 
   // ── Render ──────────────────────────────────────────────────────────────────
@@ -207,8 +227,10 @@ export function KanaPracticeClient({
         katakana={katakana}
         selectedGroups={selectedGroups}
         selectedTypes={selectedTypes}
+        engine={engine}
         onToggleGroup={handleToggleGroup}
         onToggleType={handleToggleType}
+        onChangeEngine={setEngine}
         onSelectAll={handleSelectAll}
         onDeselectAll={handleDeselectAll}
         onStartPractice={handleStartPractice}
@@ -244,17 +266,21 @@ export function KanaPracticeClient({
 
       {/* Quiz panel */}
       <QuizPanel
+        engine={engine}
         currentIndex={currentIndex}
         isFinished={showResult && total > 0}
         nextLabel={isLastQuestion ? "Lihat hasil" : "Lanjut"}
         onNext={handleNext}
         onRestart={handleRestart}
         onSelectOption={handleSelectOption}
+        onSubmitTyping={handleSubmitTyping}
+        typingState={typingState}
+        correctAnswer={currentQuestion?.correctAnswer}
         progressValue={
-          ((currentIndex + (selected ? 1 : 0)) / Math.max(total, 1)) * 100
+          ((currentIndex + (engine === "typing" ? (typingState !== "idle" ? 1 : 0) : (selected ? 1 : 0))) / Math.max(total, 1)) * 100
         }
         question={panelQuestion}
-        showNext={selected !== null}
+        showNext={engine === "typing" ? typingState !== "idle" : selected !== null}
         summary={summary}
         total={total}
       />

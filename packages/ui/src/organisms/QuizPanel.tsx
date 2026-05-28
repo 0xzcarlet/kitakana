@@ -8,6 +8,10 @@ import {
   QuizOption,
   type QuizOptionState,
 } from "../molecules/QuizOption";
+import {
+  TypingInput,
+  type TypingInputState,
+} from "../molecules/TypingInput";
 
 export type QuizPanelOption = {
   label: string;
@@ -27,6 +31,8 @@ export type QuizPanelSummary = {
 };
 
 export type QuizPanelProps = {
+  /** Quiz engine: "multiple-choice" (default) or "typing". */
+  engine?: "multiple-choice" | "typing";
   currentIndex: number;
   isFinished: boolean;
   nextLabel: string;
@@ -38,9 +44,17 @@ export type QuizPanelProps = {
   showNext: boolean;
   summary: QuizPanelSummary;
   total: number;
+  // ── Typing-engine props ──
+  /** Handler for typing engine submission. */
+  onSubmitTyping?: (answer: string) => void;
+  /** Current typing input state. */
+  typingState?: TypingInputState;
+  /** Correct answer shown on wrong typing attempt. */
+  correctAnswer?: string;
 };
 
 export function QuizPanel({
+  engine = "multiple-choice",
   currentIndex,
   isFinished,
   nextLabel,
@@ -52,6 +66,9 @@ export function QuizPanel({
   showNext,
   summary,
   total,
+  onSubmitTyping,
+  typingState = "idle",
+  correctAnswer = "",
 }: QuizPanelProps) {
   if (total === 0 || !question) {
     return (
@@ -92,11 +109,20 @@ export function QuizPanel({
     );
   }
 
+  // Determine wrong state for prompt card styling
+  const hasWrong =
+    engine === "typing"
+      ? typingState === "wrong"
+      : question.options.some((o) => o.state === "wrong");
+
+  const badgeLabel =
+    engine === "typing" ? "Ketik Romaji" : "Hiragana → Romaji";
+
   return (
     <section className="space-y-5" data-testid="quiz-panel">
       <Card className="space-y-3" tone="paper">
         <div className="flex items-center justify-between">
-          <Badge tone="orange">Hiragana → Romaji</Badge>
+          <Badge tone="orange">{badgeLabel}</Badge>
           <span
             className="text-xs font-bold uppercase tracking-wider text-text-muted"
             data-testid="quiz-progress"
@@ -109,13 +135,9 @@ export function QuizPanel({
 
       <Card
         className="flex flex-col items-center gap-6 py-10 transition-all duration-200"
-        tone={
-          question.options.some((o) => o.state === "wrong")
-            ? undefined
-            : "aqua"
-        }
+        tone={hasWrong ? undefined : "aqua"}
         style={
-          question.options.some((o) => o.state === "wrong")
+          hasWrong
             ? {
                 background: "rgb(239 68 68 / 0.15)",
                 borderColor: "rgb(220 38 38)",
@@ -126,7 +148,9 @@ export function QuizPanel({
         }
       >
         <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-          Apa bacaan kana ini?
+          {engine === "typing"
+            ? "Ketik bacaan kana ini"
+            : "Apa bacaan kana ini?"}
         </p>
         <p
           className="font-display text-7xl font-extrabold leading-none text-text sm:text-8xl"
@@ -137,16 +161,26 @@ export function QuizPanel({
         </p>
       </Card>
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-        {question.options.map((option) => (
-          <QuizOption
-            key={`${question.sourceId}-${option.label}`}
-            label={option.label}
-            state={option.state}
-            onClick={() => onSelectOption(option.label)}
-          />
-        ))}
-      </div>
+      {/* Answer area: typing input vs multiple-choice options */}
+      {engine === "typing" ? (
+        <TypingInput
+          onSubmit={onSubmitTyping ?? (() => {})}
+          correctAnswer={correctAnswer}
+          state={typingState}
+          disabled={typingState !== "idle"}
+        />
+      ) : (
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {question.options.map((option) => (
+            <QuizOption
+              key={`${question.sourceId}-${option.label}`}
+              label={option.label}
+              state={option.state}
+              onClick={() => onSelectOption(option.label)}
+            />
+          ))}
+        </div>
+      )}
 
       {showNext && (
         <div className="flex justify-end">

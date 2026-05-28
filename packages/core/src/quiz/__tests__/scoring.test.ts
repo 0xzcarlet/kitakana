@@ -8,6 +8,7 @@ const baseQuestion: QuizQuestion = {
   prompt: "あ",
   correctAnswer: "a",
   options: ["a", "i", "u", "e"],
+  engine: "multiple-choice",
   mode: "kana-to-romaji",
 };
 

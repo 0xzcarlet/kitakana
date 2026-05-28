@@ -20,8 +20,11 @@ export type KanaGroupSelectorProps = {
   selectedGroups: ReadonlySet<string>;
   /** Kana types currently selected */
   selectedTypes: ReadonlySet<KanaType>;
+  /** Quiz engine */
+  engine: "multiple-choice" | "typing";
   onToggleGroup: (group: string) => void;
   onToggleType: (type: KanaType) => void;
+  onChangeEngine: (engine: "multiple-choice" | "typing") => void;
   onSelectAll: () => void;
   onDeselectAll: () => void;
   onStartPractice: () => void;
@@ -43,11 +46,13 @@ export function KanaGroupSelector({
   groups,
   hiragana,
   katakana,
+  engine,
   onDeselectAll,
   onSelectAll,
   onStartPractice,
   onToggleGroup,
   onToggleType,
+  onChangeEngine,
   selectedGroups,
   selectedTypes,
 }: KanaGroupSelectorProps) {
@@ -62,10 +67,11 @@ export function KanaGroupSelector({
   );
 
   const totalCharacters = pool.length;
+  const minRomaji = engine === "typing" ? 1 : MIN_UNIQUE_ROMAJI;
   const canStart =
     selectedTypes.size > 0 &&
     selectedGroups.size > 0 &&
-    uniqueRomaji.size >= MIN_UNIQUE_ROMAJI;
+    uniqueRomaji.size >= minRomaji;
 
   const allGroups = useMemo(
     () => groups.map((g) => g.group),
@@ -145,6 +151,39 @@ export function KanaGroupSelector({
             ))}
           </div>
         </div>
+
+        {/* Engine toggle */}
+        <div className="space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
+            Mode latihan
+          </p>
+          <div
+            className="inline-flex gap-2"
+            role="radiogroup"
+            aria-label="Pilih mode latihan"
+          >
+            {([
+              { value: "multiple-choice" as const, label: "Pilihan" },
+              { value: "typing" as const, label: "Ketikan" },
+            ]).map((mode) => (
+              <button
+                key={mode.value}
+                type="button"
+                role="radio"
+                aria-checked={engine === mode.value}
+                data-testid={`engine-toggle-${mode.value}`}
+                onClick={() => onChangeEngine(mode.value)}
+                className={`rounded-full px-4 py-2 text-sm font-bold transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
+                  engine === mode.value
+                    ? "bg-primary text-white shadow-[0_4px_14px_rgba(244,174,82,0.4)]"
+                    : "border border-border bg-card text-text-muted hover:bg-bg-soft"
+                }`}
+              >
+                {mode.label}
+              </button>
+            ))}
+          </div>
+        </div>
       </Card>
 
       {/* Select all / deselect all */}
@@ -201,7 +240,7 @@ export function KanaGroupSelector({
               selectedTypes.size > 0 &&
               !canStart && (
                 <p className="text-xs text-amber-600 dark:text-amber-400">
-                  Butuh minimal {MIN_UNIQUE_ROMAJI} romaji unik. Tambahkan lebih
+                  Butuh minimal {minRomaji} romaji unik. Tambahkan lebih
                   banyak bagian.
                 </p>
               )}

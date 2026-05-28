@@ -1,10 +1,12 @@
 import type { KanaItem } from "@kitakana/content";
 import { createRng, shuffle } from "./random";
-import type { QuizMode, QuizQuestion } from "./types";
+import type { QuizEngine, QuizMode, QuizQuestion } from "./types";
 
 export type GenerateKanaQuizOptions = {
   count: number;
   mode: QuizMode;
+  /** Quiz engine. Defaults to "multiple-choice". */
+  engine?: QuizEngine;
   /** Seed for the deterministic RNG. Defaults to a time-based seed. */
   seed?: number;
 };
@@ -16,23 +18,23 @@ const OPTIONS_PER_QUESTION = 4;
  *
  * Guarantees:
  *   - returns at most `count` questions (limited by pool size)
- *   - each question has exactly 4 unique options
- *   - the correct answer is always among the options
+ *   - for multiple-choice: each question has exactly 4 unique options,
+ *     correct answer is always among them, and the pool must have ≥ 4
+ *     distinct romaji values
+ *   - for typing: questions have an empty options array; pool only needs ≥ 1 item
  *   - no `sourceId` is repeated within a session
- *
- * Throws if the pool has fewer than 4 distinct romaji values, since
- * we cannot build a 4-option multiple choice from less.
  */
 export function generateKanaQuiz(
   items: readonly KanaItem[],
   options: GenerateKanaQuizOptions,
 ): QuizQuestion[] {
-  const { count, mode, seed = Date.now() } = options;
+  const { count, mode, engine = "multiple-choice", seed = Date.now() } = options;
 
   if (count <= 0) return [];
 
   const uniqueRomaji = new Set(items.map((item) => item.romaji));
-  if (uniqueRomaji.size < OPTIONS_PER_QUESTION) {
+
+  if (engine === "multiple-choice" && uniqueRomaji.size < OPTIONS_PER_QUESTION) {
     throw new Error(
       `Need at least ${OPTIONS_PER_QUESTION} distinct romaji to build a quiz, got ${uniqueRomaji.size}`,
     );
@@ -45,6 +47,21 @@ export function generateKanaQuiz(
   const questions: QuizQuestion[] = [];
   for (let index = 0; index < sessionSize; index++) {
     const source = shuffledPool[index];
+
+    if (engine === "typing") {
+      questions.push({
+        id: `${source.id}-q${index + 1}`,
+        sourceId: source.id,
+        prompt: source.kana,
+        correctAnswer: source.romaji,
+        options: [],
+        engine,
+        mode,
+      });
+      continue;
+    }
+
+    // ── multiple-choice: build distractor options ──
     const distractorPool = items.filter(
       (candidate) => candidate.romaji !== source.romaji,
     );
@@ -68,6 +85,7 @@ export function generateKanaQuiz(
       prompt: source.kana,
       correctAnswer: source.romaji,
       options: optionPool,
+      engine,
       mode,
     });
   }

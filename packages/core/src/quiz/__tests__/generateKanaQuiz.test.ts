@@ -64,4 +64,63 @@ describe("generateKanaQuiz", () => {
       generateKanaQuiz(tinyPool, { count: 1, mode: "kana-to-romaji", seed: 1 }),
     ).toThrow();
   });
+
+  describe("engine: typing", () => {
+    it("generates questions with empty options array and engine field set", () => {
+      const questions = generateKanaQuiz(hiragana, {
+        count: 5,
+        mode: "kana-to-romaji",
+        engine: "typing",
+        seed: 1,
+      });
+      expect(questions).toHaveLength(5);
+      for (const q of questions) {
+        expect(q.options).toEqual([]);
+        expect(q.engine).toBe("typing");
+        expect(q.correctAnswer).toBeTruthy();
+      }
+    });
+
+    it("works with pools smaller than 4 unique romaji", () => {
+      const tinyPool = hiragana.slice(0, 2);
+      const questions = generateKanaQuiz(tinyPool, {
+        count: 2,
+        mode: "kana-to-romaji",
+        engine: "typing",
+        seed: 1,
+      });
+      expect(questions).toHaveLength(2);
+    });
+
+    it("returns deterministic output for the same seed", () => {
+      const a = generateKanaQuiz(hiragana, {
+        count: 10,
+        mode: "kana-to-romaji",
+        engine: "typing",
+        seed: 42,
+      });
+      const b = generateKanaQuiz(hiragana, {
+        count: 10,
+        mode: "kana-to-romaji",
+        engine: "typing",
+        seed: 42,
+      });
+      expect(a).toEqual(b);
+    });
+  });
+
+  describe("engine: multiple-choice (explicit)", () => {
+    it("sets engine field to multiple-choice", () => {
+      const questions = generateKanaQuiz(hiragana, {
+        count: 3,
+        mode: "kana-to-romaji",
+        engine: "multiple-choice",
+        seed: 1,
+      });
+      for (const q of questions) {
+        expect(q.engine).toBe("multiple-choice");
+        expect(q.options).toHaveLength(4);
+      }
+    });
+  });
 });

@@ -1,11 +1,15 @@
 export type QuizMode = "kana-to-romaji";
 
+export type QuizEngine = "multiple-choice" | "typing";
+
 export type QuizQuestion = {
   id: string;
   sourceId: string;
   prompt: string;
   correctAnswer: string;
+  /** Option labels for multiple-choice; empty array for typing engine. */
   options: string[];
+  engine: QuizEngine;
   mode: QuizMode;
 };
 
