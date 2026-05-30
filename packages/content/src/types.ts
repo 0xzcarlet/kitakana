@@ -37,3 +37,24 @@ export type KanaItem = {
   isHandakuten?: boolean;
   isYoon?: boolean;
 };
+
+export type KanjiLevel = "N1" | "N2" | "N3" | "N4" | "N5";
+
+export type KanjiExample = {
+  word: string;
+  reading: string;
+  meaning: string;
+};
+
+export type KanjiItem = {
+  id: string;
+  kanji: string;
+  level: KanjiLevel;
+  meanings: string[];
+  onyomi: string[];
+  kunyomi: string[];
+  quizReading: string;
+  strokes: number;
+  order: number;
+  examples: KanjiExample[];
+};

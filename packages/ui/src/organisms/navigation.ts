@@ -8,6 +8,6 @@ export const mainNavigation: NavigationItem[] = [
   { href: "/", kana: "家", label: "Beranda" },
   { href: "/kana", kana: "あ", label: "Kana" },
   { href: "/quiz", kana: "問", label: "Kuis" },
-  { href: "/review", kana: "復", label: "Review" },
+  { href: "/kanji", kana: "漢", label: "Kanji" },
   { href: "/settings", kana: "設", label: "Pengaturan" },
 ];

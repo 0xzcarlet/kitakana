@@ -1,4 +1,7 @@
-export type QuizMode = "kana-to-romaji";
+export type QuizMode =
+  | "kana-to-romaji"
+  | "kanji-to-meaning"
+  | "kanji-to-reading";
 
 export type QuizEngine = "multiple-choice" | "typing";
 

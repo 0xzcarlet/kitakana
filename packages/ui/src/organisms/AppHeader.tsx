@@ -9,7 +9,7 @@ export function AppHeader() {
           Kitakana
         </p>
         <p className="mt-2 max-w-2xl text-base leading-7 text-text-muted">
-          Belajar kana, kosakata, dan review harian.
+          Belajar kana, kanji, dan kosakata dasar.
         </p>
       </div>
     </header>

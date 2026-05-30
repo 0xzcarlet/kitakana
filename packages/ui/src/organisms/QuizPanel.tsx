@@ -34,6 +34,9 @@ export type QuizPanelSummary = {
 export type QuizPanelProps = {
   /** Quiz engine: "multiple-choice" (default) or "typing". */
   engine?: "multiple-choice" | "typing";
+  badgeLabel?: string;
+  emptyDescription?: string;
+  emptyTitle?: string;
   currentIndex: number;
   isFinished: boolean;
   nextLabel: string;
@@ -41,7 +44,10 @@ export type QuizPanelProps = {
   onRestart: () => void;
   onSelectOption: (option: string) => void;
   progressValue: number;
+  promptLabel?: string;
+  promptTestId?: string;
   question: QuizPanelQuestion | null;
+  restartLabel?: string;
   showNext: boolean;
   summary: QuizPanelSummary;
   total: number;
@@ -56,6 +62,9 @@ export type QuizPanelProps = {
 
 export function QuizPanel({
   engine = "multiple-choice",
+  badgeLabel,
+  emptyDescription = "Kuis belum bisa dimulai karena daftar kana masih kosong.",
+  emptyTitle = "Belum ada soal",
   currentIndex,
   isFinished,
   nextLabel,
@@ -63,7 +72,10 @@ export function QuizPanel({
   onRestart,
   onSelectOption,
   progressValue,
+  promptLabel,
+  promptTestId = "kana-prompt",
   question,
+  restartLabel = "Ulangi kuis",
   showNext,
   summary,
   total,
@@ -99,10 +111,10 @@ export function QuizPanel({
     return (
       <Card className="space-y-3">
         <p className="font-display text-2xl font-extrabold text-text">
-          Belum ada soal
+          {emptyTitle}
         </p>
         <p className="text-sm leading-6 text-text-muted">
-          Kuis belum bisa dimulai karena daftar kana masih kosong.
+          {emptyDescription}
         </p>
       </Card>
     );
@@ -127,7 +139,7 @@ export function QuizPanel({
         </p>
         <div className="flex justify-center pt-2">
           <Button data-testid="quiz-restart" onClick={onRestart}>
-            Ulangi kuis
+            {restartLabel}
           </Button>
         </div>
       </Card>
@@ -140,14 +152,17 @@ export function QuizPanel({
       ? typingState === "wrong"
       : question.options.some((o) => o.state === "wrong");
 
-  const badgeLabel =
-    engine === "typing" ? "Ketik Romaji" : "Hiragana → Romaji";
+  const resolvedBadgeLabel =
+    badgeLabel ?? (engine === "typing" ? "Ketik Romaji" : "Hiragana → Romaji");
+  const resolvedPromptLabel =
+    promptLabel ??
+    (engine === "typing" ? "Ketik bacaan kana ini" : "Apa bacaan kana ini?");
 
   return (
     <section className="space-y-5" data-testid="quiz-panel">
       <Card className="space-y-3" tone="paper">
         <div className="flex items-center justify-between">
-          <Badge tone="orange">{badgeLabel}</Badge>
+          <Badge tone="orange">{resolvedBadgeLabel}</Badge>
           <span
             className="text-xs font-bold uppercase tracking-wider text-text-muted"
             data-testid="quiz-progress"
@@ -173,13 +188,11 @@ export function QuizPanel({
         }
       >
         <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-          {engine === "typing"
-            ? "Ketik bacaan kana ini"
-            : "Apa bacaan kana ini?"}
+          {resolvedPromptLabel}
         </p>
         <p
           className="font-display text-7xl font-extrabold leading-none text-text sm:text-8xl"
-          data-testid="kana-prompt"
+          data-testid={promptTestId}
           data-source-id={question.sourceId}
         >
           {question.prompt}
