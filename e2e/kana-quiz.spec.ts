@@ -237,13 +237,38 @@ test("practice page works with multiple-choice engine", async ({ page }) => {
   await page.goto("/kana/practice");
 
   await expect(page.getByTestId("kana-group-selector")).toBeVisible();
-  
+  const vowelCard = page.getByTestId("group-card-vowel");
+  await expect(vowelCard).toBeVisible();
+  await expect(page.getByTestId("group-card-vowel-indicator")).toBeVisible();
+  const cardMetrics = await vowelCard.evaluate((card) => {
+    const indicator = card.querySelector<HTMLElement>(
+      '[data-testid="group-card-vowel-indicator"]',
+    );
+    if (!indicator) return null;
+
+    const cardRect = card.getBoundingClientRect();
+    const indicatorRect = indicator.getBoundingClientRect();
+
+    return {
+      cardHeight: Math.round(cardRect.height),
+      indicatorCenterY: Math.round(
+        indicatorRect.top + indicatorRect.height / 2 - cardRect.top,
+      ),
+    };
+  });
+
+  expect(cardMetrics).not.toBeNull();
+  expect(cardMetrics?.cardHeight).toBeGreaterThanOrEqual(144);
+  expect(cardMetrics?.indicatorCenterY).toBeGreaterThan(
+    (cardMetrics?.cardHeight ?? 0) / 2,
+  );
+
   // Select a group (e.g. vowel group)
-  await page.getByTestId("group-card-vowel").click();
-  
+  await vowelCard.click();
+
   // Start practice
   await page.getByTestId("start-practice-btn").click();
-  
+
   // Verify quiz panel shows up
   await expect(page.getByTestId("quiz-panel")).toBeVisible();
   await expect(page.getByTestId("quiz-option")).toHaveCount(4);

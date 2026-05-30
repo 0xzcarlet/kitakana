@@ -33,7 +33,7 @@ export function KanaGroupCard({
       data-testid={testId ?? "kana-group-card"}
       onClick={onToggle}
       className={cx(
-        "group relative flex w-full flex-col items-start gap-2 rounded-2xl border p-4 text-left",
+        "group relative flex min-h-36 w-full flex-col items-start gap-3 rounded-2xl border p-5 text-left sm:min-h-40 sm:p-6",
         "transition duration-200",
         "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
         isSelected
@@ -44,8 +44,9 @@ export function KanaGroupCard({
       {/* Selection indicator */}
       <span
         aria-hidden="true"
+        data-testid={`${testId ?? "kana-group-card"}-indicator`}
         className={cx(
-          "absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full border-2 transition duration-200",
+          "absolute bottom-4 right-4 flex h-6 w-6 items-center justify-center rounded-full border-2 transition duration-200 sm:bottom-5 sm:right-5",
           isSelected
             ? "border-primary bg-primary text-white"
             : "border-border bg-transparent",
@@ -53,7 +54,7 @@ export function KanaGroupCard({
       >
         {isSelected && (
           <svg
-            className="h-3 w-3"
+            className="h-3.5 w-3.5"
             fill="none"
             viewBox="0 0 12 12"
             stroke="currentColor"
@@ -69,12 +70,12 @@ export function KanaGroupCard({
       </span>
 
       {/* Kana preview */}
-      <div className="flex flex-wrap gap-1">
+      <div className="flex flex-wrap gap-1.5">
         {previewCharacters.slice(0, 5).map((char) => (
           <span
             key={char}
             className={cx(
-              "font-display text-2xl font-extrabold leading-none",
+              "font-display text-3xl font-extrabold leading-none sm:text-[2rem]",
               isSelected ? "text-text" : "text-text-muted",
             )}
           >
@@ -82,33 +83,35 @@ export function KanaGroupCard({
           </span>
         ))}
         {previewCharacters.length > 5 && (
-          <span className="font-display text-lg font-bold leading-none text-text-muted">
+          <span className="font-display text-2xl font-bold leading-none text-text-muted">
             …
           </span>
         )}
       </div>
 
-      {/* Label */}
-      <p
-        className={cx(
-          "text-xs font-semibold leading-tight",
-          isSelected ? "text-text" : "text-text-muted",
-        )}
-      >
-        {label}
-      </p>
+      <div className="mt-auto space-y-2 pr-10">
+        {/* Label */}
+        <p
+          className={cx(
+            "text-sm font-semibold leading-tight",
+            isSelected ? "text-text" : "text-text-muted",
+          )}
+        >
+          {label}
+        </p>
 
-      {/* Character count badge */}
-      <span
-        className={cx(
-          "inline-flex items-center rounded-full px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider",
-          isSelected
-            ? "bg-primary/20 text-primary"
-            : "bg-bg-soft text-text-muted",
-        )}
-      >
-        {characterCount} kana
-      </span>
+        {/* Character count badge */}
+        <span
+          className={cx(
+            "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wider",
+            isSelected
+              ? "bg-primary/20 text-primary"
+              : "bg-bg-soft text-text-muted",
+          )}
+        >
+          {characterCount} kana
+        </span>
+      </div>
     </button>
   );
 }
