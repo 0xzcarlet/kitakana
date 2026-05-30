@@ -1,99 +1,54 @@
 # Kitakana
 
-Kitakana adalah open-source Japanese learning PWA yang dibangun sebagai monorepo. Fokus MVP-nya adalah pengalaman belajar yang ringan, local-first, dan offline-first untuk kana, quiz, vocabulary, review harian, dan progress tracking lokal.
+Kitakana adalah PWA open-source untuk belajar bahasa Jepang. Fokus saat ini ada di kana chart, quiz kana, latihan kanji N5, preferensi belajar, dan progress lokal tanpa login.
 
-## Tech Stack
+## Stack
 
-- Next.js
-- TypeScript
-- Tailwind CSS
+- Next.js 16, React 19, TypeScript
+- Tailwind CSS 4
 - pnpm workspace monorepo
+- Vitest untuk unit test
+- Playwright untuk e2e test
+- Dexie/IndexedDB untuk storage lokal
 
-## Workspace Structure
+## Struktur
 
 ```text
 .
-├── apps/
-│   └── web/
-├── packages/
-│   ├── config/
-│   ├── content/
-│   ├── core/
-│   └── ui/
-├── package.json
-├── pnpm-lock.yaml
-└── pnpm-workspace.yaml
+├── apps/web              # Aplikasi Next.js
+├── packages/content      # Data kana/kanji, schema, loader
+├── packages/core         # Quiz engine dan scoring
+├── packages/storage      # Local-first persistence
+├── packages/ui           # Shared UI components
+└── e2e                   # Playwright tests
 ```
 
-## Apps
+## Development
 
-### `apps/web`
+Install dependency:
 
-Web app utama Kitakana. Saat ini workspace ini berisi aplikasi Next.js untuk produk web-first/PWA.
+```bash
+corepack pnpm install
+```
 
-Untuk menjalankan development server dari root:
+Jalankan web app:
 
 ```bash
 pnpm dev
 ```
 
-Perintah root lain yang tersedia:
+Command utama:
 
 ```bash
 pnpm build
-pnpm start
 pnpm lint
+pnpm typecheck
 pnpm test
 pnpm test:e2e
-pnpm typecheck
 ```
 
-## Packages
+## Catatan
 
-Folder `packages/` berisi modul shared yang boundary-nya sudah jelas. Logic yang masih spesifik ke route tetap tinggal di `apps/web` sampai pattern reuse-nya matang.
+Data belajar awal disimpan sebagai JSON di `packages/content`. Progress dan preferensi user disimpan lokal di browser melalui `packages/storage`, jadi MVP ini belum membutuhkan backend, login, atau cloud sync.
 
-### `packages/content`
-
-Dipakai untuk semua hal yang berhubungan dengan materi belajar:
-
-- schema TypeScript untuk kana, vocabulary, dan metadata belajar
-- JSON kana data
-- loader dan parsing JSON
-- validator dataset
-- helper untuk filtering type, group, level, tag, atau locale
-
-### `packages/core`
-
-Dipakai untuk shared domain logic:
-
-- aturan quiz kana
-- spaced repetition atau review scheduling
-- progress calculation
-- streak dan statistik belajar
-
-Target package ini adalah logic murni yang tidak tergantung UI framework.
-
-### `packages/ui`
-
-Dipakai untuk komponen reusable ketika atomic design sudah mulai stabil:
-
-- atoms, molecules, organisms lintas feature
-- token UI atau primitive visual bersama
-- komponen presentational yang tidak mengandung business logic berat
-
-Jangan pindahkan komponen ke sini terlalu dini. Mulai ekstrak setelah pattern reuse benar-benar terlihat.
-
-### `packages/config`
-
-Folder ini disiapkan untuk shared tooling config ketika monorepo mulai bertambah:
-
-- base `tsconfig`
-- preset ESLint
-- shared PostCSS atau Tailwind config
-- script atau preset build yang dipakai lebih dari satu workspace
-
-Saat ini folder ini sengaja masih tipis supaya setup tetap sederhana.
-
-## Storage Note
-
-Persistence untuk learned kana, quiz history, dan progress lokal akan masuk ke slice berikutnya menggunakan IndexedDB/Dexie sesuai PRD. Slice kana v0.2 ini fokus pada JSON content, quiz logic, dan integrasi web tanpa backend atau login.
+Detail arah produk ada di [PRD.md](./PRD.md).
