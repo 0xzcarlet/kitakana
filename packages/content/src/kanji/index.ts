@@ -83,11 +83,11 @@ export type KanjiLevelMeta = {
 };
 
 export const KANJI_LEVEL_META: KanjiLevelMeta[] = [
-  { label: "N1", displayOrder: 1, isAvailable: false },
-  { label: "N2", displayOrder: 2, isAvailable: false },
+  { label: "N5", displayOrder: 1, isAvailable: true },
+  { label: "N4", displayOrder: 2, isAvailable: false },
   { label: "N3", displayOrder: 3, isAvailable: false },
-  { label: "N4", displayOrder: 4, isAvailable: false },
-  { label: "N5", displayOrder: 5, isAvailable: true },
+  { label: "N2", displayOrder: 4, isAvailable: false },
+  { label: "N1", displayOrder: 5, isAvailable: false },
 ];
 
 export const kanjiN5: KanjiItem[] = parseKanji(kanjiN5Raw);

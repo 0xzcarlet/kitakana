@@ -8,16 +8,16 @@ import {
 } from "../index";
 
 describe("kanji loader helpers", () => {
-  it("exposes levels in JLPT order with only N5 available", () => {
+  it("exposes levels with the available N5 content first", () => {
     expect(KANJI_LEVEL_META.map((level) => level.label)).toEqual([
-      "N1",
-      "N2",
-      "N3",
-      "N4",
       "N5",
+      "N4",
+      "N3",
+      "N2",
+      "N1",
     ]);
     expect(KANJI_LEVEL_META.filter((level) => level.isAvailable)).toEqual([
-      { label: "N5", displayOrder: 5, isAvailable: true },
+      { label: "N5", displayOrder: 1, isAvailable: true },
     ]);
   });
 
