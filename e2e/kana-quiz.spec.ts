@@ -52,6 +52,7 @@ async function getLearningSessionCount(page: Page): Promise<number> {
 test("home dashboard renders only the local learning cards", async ({ page }) => {
   await page.goto("/");
 
+  await expect(page.getByTestId("app-header")).toBeVisible();
   await expect(page.getByTestId("home-streak-card")).toBeVisible();
   await expect(page.getByTestId("home-kana-cta-card")).toBeVisible();
   await expect(page.getByTestId("home-accuracy-card")).toBeVisible();
@@ -140,6 +141,7 @@ test("mobile bottom nav is solid and full width", async ({ page }) => {
 test("kana page renders the chart and toggles kana type", async ({ page }) => {
   await page.goto("/kana");
 
+  await expect(page.getByTestId("app-header")).toHaveCount(0);
   await expect(page.getByTestId("kana-chart")).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Hiragana" }),

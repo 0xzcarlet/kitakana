@@ -14,7 +14,7 @@ export function AppShell({ activeHref = "/", children }: AppShellProps) {
         <AppSidebar activeHref={activeHref} />
         <div className="min-w-0 flex-1 lg:pl-72">
           <main className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 pb-[calc(6rem+env(safe-area-inset-bottom))] pt-5 sm:px-6 lg:px-10 lg:py-8">
-            <AppHeader />
+            {activeHref === "/" ? <AppHeader /> : null}
             {children}
           </main>
         </div>
