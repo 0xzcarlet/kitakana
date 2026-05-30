@@ -9,6 +9,7 @@ import {
   type QuizEngine,
   type QuizQuestion,
 } from "@kitakana/core";
+import type { LearningKanaTypePreference } from "@kitakana/storage";
 import { recordLearningSession } from "@kitakana/storage";
 import {
   KanaGroupSelector,
@@ -16,6 +17,7 @@ import {
   type QuizPanelOption,
   type QuizPanelSummary,
 } from "@kitakana/ui";
+import { useLearningPreferences } from "@/hooks/useLearningPreferences";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -41,6 +43,15 @@ function buildFilteredPool(
   return sources.filter((item) => selectedGroups.has(item.group));
 }
 
+function buildSelectedTypesFromPreference(
+  preference: LearningKanaTypePreference,
+): Set<KanaType> {
+  if (preference === "both") {
+    return new Set<KanaType>(["hiragana", "katakana"]);
+  }
+  return new Set<KanaType>([preference]);
+}
+
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function KanaPracticeClient({
@@ -48,6 +59,8 @@ export function KanaPracticeClient({
   hiragana,
   katakana,
 }: KanaPracticeClientProps) {
+  const { isLoaded: preferencesLoaded, preferences } = useLearningPreferences();
+
   // ── Setup phase state ───────────────────────────────────────────────────────
   const [selectedGroups, setSelectedGroups] = useState<Set<string>>(
     () => new Set(),
@@ -65,12 +78,14 @@ export function KanaPracticeClient({
   const [answers, setAnswers] = useState<QuizAnswer[]>([]);
   const [showResult, setShowResult] = useState(false);
   const [typingState, setTypingState] = useState<"idle" | "correct" | "wrong">("idle");
+  const hasCustomizedSetup = useRef(false);
   const hasRecordedResult = useRef(false);
 
   // ── Setup handlers ──────────────────────────────────────────────────────────
   const allGroupIds = useMemo(() => groups.map((g) => g.group), [groups]);
 
   const handleToggleGroup = (group: string) => {
+    hasCustomizedSetup.current = true;
     setSelectedGroups((prev) => {
       const next = new Set(prev);
       if (next.has(group)) {
@@ -83,6 +98,7 @@ export function KanaPracticeClient({
   };
 
   const handleToggleType = (type: KanaType) => {
+    hasCustomizedSetup.current = true;
     setSelectedTypes((prev) => {
       const next = new Set(prev);
       if (next.has(type)) {
@@ -96,12 +112,34 @@ export function KanaPracticeClient({
   };
 
   const handleSelectAll = () => {
+    hasCustomizedSetup.current = true;
     setSelectedGroups(new Set(allGroupIds));
   };
 
   const handleDeselectAll = () => {
+    hasCustomizedSetup.current = true;
     setSelectedGroups(new Set());
   };
+
+  const handleChangeEngine = (nextEngine: QuizEngine) => {
+    hasCustomizedSetup.current = true;
+    setEngine(nextEngine);
+  };
+
+  useEffect(() => {
+    if (!preferencesLoaded || hasCustomizedSetup.current) {
+      return;
+    }
+
+    setEngine(preferences.defaultEngine);
+    setSelectedTypes(
+      buildSelectedTypesFromPreference(preferences.defaultKanaType),
+    );
+  }, [
+    preferences.defaultEngine,
+    preferences.defaultKanaType,
+    preferencesLoaded,
+  ]);
 
   const handleStartPractice = () => {
     const pool = buildFilteredPool(
@@ -111,7 +149,7 @@ export function KanaPracticeClient({
       selectedGroups,
     );
     const newQuestions = generateKanaQuiz(pool, {
-      count: 10,
+      count: preferences.questionCount,
       mode: "kana-to-romaji",
       engine,
       seed: Date.now(),
@@ -211,7 +249,7 @@ export function KanaPracticeClient({
       selectedGroups,
     );
     const newQuestions = generateKanaQuiz(pool, {
-      count: 10,
+      count: preferences.questionCount,
       mode: "kana-to-romaji",
       engine,
       seed: Date.now(),
@@ -247,9 +285,10 @@ export function KanaPracticeClient({
         selectedGroups={selectedGroups}
         selectedTypes={selectedTypes}
         engine={engine}
+        showRomaji={preferences.showRomaji}
         onToggleGroup={handleToggleGroup}
         onToggleType={handleToggleType}
-        onChangeEngine={setEngine}
+        onChangeEngine={handleChangeEngine}
         onSelectAll={handleSelectAll}
         onDeselectAll={handleDeselectAll}
         onStartPractice={handleStartPractice}

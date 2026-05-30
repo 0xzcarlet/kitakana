@@ -1,6 +1,6 @@
 import { hiragana, katakana } from "@kitakana/content";
-import { KanaChart } from "@kitakana/ui";
+import { KanaPageClient } from "./KanaPageClient";
 
 export default function KanaPage() {
-  return <KanaChart hiragana={hiragana} katakana={katakana} />;
+  return <KanaPageClient hiragana={hiragana} katakana={katakana} />;
 }

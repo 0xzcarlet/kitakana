@@ -22,6 +22,8 @@ export type KanaGroupSelectorProps = {
   selectedTypes: ReadonlySet<KanaType>;
   /** Quiz engine */
   engine: "multiple-choice" | "typing";
+  /** Whether to show romaji helper labels */
+  showRomaji?: boolean;
   onToggleGroup: (group: string) => void;
   onToggleType: (type: KanaType) => void;
   onChangeEngine: (engine: "multiple-choice" | "typing") => void;
@@ -55,6 +57,7 @@ export function KanaGroupSelector({
   onChangeEngine,
   selectedGroups,
   selectedTypes,
+  showRomaji = true,
 }: KanaGroupSelectorProps) {
   const pool = useMemo(
     () => buildPool(hiragana, katakana, selectedTypes, selectedGroups),
@@ -213,6 +216,7 @@ export function KanaGroupSelector({
               previewCharacters={preview}
               characterCount={count}
               isSelected={selectedGroups.has(meta.group)}
+              showRomaji={showRomaji}
               onToggle={() => onToggleGroup(meta.group)}
               data-testid={`group-card-${meta.group}`}
             />
@@ -240,7 +244,7 @@ export function KanaGroupSelector({
               selectedTypes.size > 0 &&
               !canStart && (
                 <p className="text-xs text-amber-600 dark:text-amber-400">
-                  Butuh minimal {minRomaji} romaji unik. Tambahkan lebih
+                  Butuh minimal {minRomaji} jawaban unik. Tambahkan lebih
                   banyak bagian.
                 </p>
               )}
@@ -251,7 +255,7 @@ export function KanaGroupSelector({
             )}
             {canStart && (
               <p className="text-xs text-text-muted">
-                {uniqueRomaji.size} romaji unik · siap latihan!
+                {uniqueRomaji.size} jawaban unik · siap latihan!
               </p>
             )}
           </div>

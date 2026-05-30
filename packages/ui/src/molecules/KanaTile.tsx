@@ -7,6 +7,7 @@ export type KanaTileProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   kana: string;
   romaji: string;
   learned?: boolean;
+  showRomaji?: boolean;
 };
 
 export function KanaTile({
@@ -14,6 +15,7 @@ export function KanaTile({
   kana,
   learned,
   romaji,
+  showRomaji = true,
   ...props
 }: KanaTileProps) {
   return (
@@ -34,9 +36,11 @@ export function KanaTile({
       <span className="font-display text-3xl font-extrabold leading-none text-text sm:text-4xl">
         {kana}
       </span>
-      <span className="text-[0.7rem] font-semibold uppercase tracking-wider text-text-muted">
-        {romaji}
-      </span>
+      {showRomaji && (
+        <span className="text-[0.7rem] font-semibold uppercase tracking-wider text-text-muted">
+          {romaji}
+        </span>
+      )}
     </button>
   );
 }

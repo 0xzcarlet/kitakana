@@ -11,6 +11,8 @@ export type KanaGroupCardProps = {
   characterCount: number;
   /** Whether this group is currently selected */
   isSelected: boolean;
+  /** Whether to show romaji helper labels */
+  showRomaji?: boolean;
   /** Toggle handler */
   onToggle: () => void;
   /** Optional test id */
@@ -23,6 +25,7 @@ export function KanaGroupCard({
   label,
   onToggle,
   previewCharacters,
+  showRomaji = true,
   "data-testid": testId,
 }: KanaGroupCardProps) {
   return (
@@ -90,15 +93,16 @@ export function KanaGroupCard({
       </div>
 
       <div className="mt-auto space-y-2 pr-10">
-        {/* Label */}
-        <p
-          className={cx(
-            "text-sm font-semibold leading-tight",
-            isSelected ? "text-text" : "text-text-muted",
-          )}
-        >
-          {label}
-        </p>
+        {showRomaji && (
+          <p
+            className={cx(
+              "text-sm font-semibold leading-tight",
+              isSelected ? "text-text" : "text-text-muted",
+            )}
+          >
+            {label}
+          </p>
+        )}
 
         {/* Character count badge */}
         <span

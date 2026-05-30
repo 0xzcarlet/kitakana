@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Badge } from "../atoms/Badge";
 import { Button } from "../atoms/Button";
@@ -24,6 +24,7 @@ export type KanaChartProps = {
   defaultType?: KanaChartType;
   learnedIds?: readonly string[];
   onToggleLearned?: (id: string) => void;
+  showRomaji?: boolean;
 };
 
 type Section = {
@@ -89,6 +90,7 @@ export function KanaChart({
   katakana,
   learnedIds,
   onToggleLearned,
+  showRomaji = true,
 }: KanaChartProps) {
   const [type, setType] = useState<KanaChartType>(defaultType);
   const [internalLearned, setInternalLearned] = useState<Set<string>>(
@@ -99,6 +101,10 @@ export function KanaChart({
   const sections = useMemo(() => buildSections(items), [items]);
   const controlledLearned = useMemo(() => new Set(learnedIds), [learnedIds]);
   const learned = learnedIds ? controlledLearned : internalLearned;
+
+  useEffect(() => {
+    setType(defaultType);
+  }, [defaultType]);
 
   const toggleLearned = (id: string) => {
     onToggleLearned?.(id);
@@ -183,6 +189,7 @@ export function KanaChart({
                 kana={item.kana}
                 romaji={item.romaji}
                 learned={learned.has(item.id)}
+                showRomaji={showRomaji}
                 onClick={() => toggleLearned(item.id)}
                 aria-pressed={learned.has(item.id)}
               />
