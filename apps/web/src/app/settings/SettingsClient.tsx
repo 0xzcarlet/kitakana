@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import type {
   LearningKanaTypePreference,
+  LearningPreferences,
   LearningPracticeEngine,
   LearningQuestionCount,
 } from "@kitakana/storage";
@@ -82,6 +84,17 @@ function SegmentedControl<TValue extends string | number>({
 export function SettingsClient() {
   const { preferences, resetPreferences, updatePreferences } =
     useLearningPreferences();
+  const [hasSaved, setHasSaved] = useState(false);
+
+  const handleSave = (nextPreferences: LearningPreferences) => {
+    updatePreferences(nextPreferences);
+    setHasSaved(true);
+  };
+
+  const handleReset = () => {
+    resetPreferences();
+    setHasSaved(false);
+  };
 
   return (
     <section className="space-y-6" data-testid="settings-page">
@@ -93,108 +106,157 @@ export function SettingsClient() {
           </h1>
           <p className="max-w-2xl text-sm leading-6 text-text-muted">
             Atur default latihan kana yang akan dipakai saat membuka chart dan
-            practice. Perubahan tersimpan otomatis di browser ini.
+            practice. Pilih preferensi lalu simpan saat sudah cocok.
           </p>
         </div>
       </Card>
 
-      <Card className="space-y-6">
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div className="space-y-3">
-            <div>
-              <h2 className="font-display text-lg font-extrabold text-text">
-                Mode latihan
-              </h2>
-              <p className="mt-1 text-sm leading-6 text-text-muted">
-                Default mode saat mulai latihan kana.
-              </p>
-            </div>
-            <SegmentedControl
-              ariaLabel="Mode latihan"
-              options={ENGINE_OPTIONS}
-              testId="setting-default-engine"
-              value={preferences.defaultEngine}
-              onChange={(defaultEngine) => updatePreferences({ defaultEngine })}
-            />
-          </div>
+      <SettingsForm
+        key={JSON.stringify(preferences)}
+        hasSaved={hasSaved}
+        initialPreferences={preferences}
+        onReset={handleReset}
+        onSave={handleSave}
+      />
+    </section>
+  );
+}
 
-          <div className="space-y-3">
-            <div>
-              <h2 className="font-display text-lg font-extrabold text-text">
-                Jenis kana
-              </h2>
-              <p className="mt-1 text-sm leading-6 text-text-muted">
-                Default kana yang aktif saat membuka practice.
-              </p>
-            </div>
-            <SegmentedControl
-              ariaLabel="Jenis kana"
-              options={KANA_TYPE_OPTIONS}
-              testId="setting-default-kana-type"
-              value={preferences.defaultKanaType}
-              onChange={(defaultKanaType) =>
-                updatePreferences({ defaultKanaType })
-              }
-            />
-          </div>
+type SettingsFormProps = {
+  hasSaved: boolean;
+  initialPreferences: LearningPreferences;
+  onReset: () => void;
+  onSave: (preferences: LearningPreferences) => void;
+};
 
-          <div className="space-y-3">
-            <div>
-              <h2 className="font-display text-lg font-extrabold text-text">
-                Jumlah soal
-              </h2>
-              <p className="mt-1 text-sm leading-6 text-text-muted">
-                Banyak soal dalam satu sesi latihan kana.
-              </p>
-            </div>
-            <SegmentedControl
-              ariaLabel="Jumlah soal"
-              options={QUESTION_COUNT_OPTIONS.map((value) => ({
-                label: `${value} soal`,
-                value,
-              }))}
-              testId="setting-question-count"
-              value={preferences.questionCount}
-              onChange={(questionCount) => updatePreferences({ questionCount })}
-            />
-          </div>
+function SettingsForm({
+  hasSaved,
+  initialPreferences,
+  onReset,
+  onSave,
+}: SettingsFormProps) {
+  const [draft, setDraft] = useState<LearningPreferences>(initialPreferences);
+  const hasUnsavedChanges =
+    JSON.stringify(draft) !== JSON.stringify(initialPreferences);
 
-          <div className="space-y-3">
-            <div>
-              <h2 className="font-display text-lg font-extrabold text-text">
-                Romaji
-              </h2>
-              <p className="mt-1 text-sm leading-6 text-text-muted">
-                Tampilkan bantuan romaji di chart dan pilihan bagian.
-              </p>
-            </div>
-            <label className="inline-flex min-h-12 cursor-pointer items-center gap-3 rounded-2xl border border-border bg-bg-soft px-4 py-2 transition hover:bg-card">
-              <input
-                type="checkbox"
-                data-testid="setting-show-romaji"
-                checked={preferences.showRomaji}
-                onChange={(event) =>
-                  updatePreferences({ showRomaji: event.currentTarget.checked })
-                }
-                className="h-5 w-5 accent-primary"
-              />
-              <span className="text-sm font-bold text-text">
-                Tampilkan romaji
-              </span>
-            </label>
+  const updateDraft = (patch: Partial<LearningPreferences>) => {
+    setDraft((current) => ({ ...current, ...patch }));
+  };
+
+  return (
+    <Card className="space-y-6">
+      <div className="grid gap-6 lg:grid-cols-2">
+        <div className="space-y-3">
+          <div>
+            <h2 className="font-display text-lg font-extrabold text-text">
+              Mode latihan
+            </h2>
+            <p className="mt-1 text-sm leading-6 text-text-muted">
+              Default mode saat mulai latihan kana.
+            </p>
           </div>
+          <SegmentedControl
+            ariaLabel="Mode latihan"
+            options={ENGINE_OPTIONS}
+            testId="setting-default-engine"
+            value={draft.defaultEngine}
+            onChange={(defaultEngine) => updateDraft({ defaultEngine })}
+          />
         </div>
 
-        <div className="flex justify-end border-t border-border pt-5">
+        <div className="space-y-3">
+          <div>
+            <h2 className="font-display text-lg font-extrabold text-text">
+              Jenis kana
+            </h2>
+            <p className="mt-1 text-sm leading-6 text-text-muted">
+              Default kana yang aktif saat membuka practice.
+            </p>
+          </div>
+          <SegmentedControl
+            ariaLabel="Jenis kana"
+            options={KANA_TYPE_OPTIONS}
+            testId="setting-default-kana-type"
+            value={draft.defaultKanaType}
+            onChange={(defaultKanaType) => updateDraft({ defaultKanaType })}
+          />
+        </div>
+
+        <div className="space-y-3">
+          <div>
+            <h2 className="font-display text-lg font-extrabold text-text">
+              Jumlah soal
+            </h2>
+            <p className="mt-1 text-sm leading-6 text-text-muted">
+              Banyak soal dalam satu sesi latihan kana.
+            </p>
+          </div>
+          <SegmentedControl
+            ariaLabel="Jumlah soal"
+            options={QUESTION_COUNT_OPTIONS.map((value) => ({
+              label: `${value} soal`,
+              value,
+            }))}
+            testId="setting-question-count"
+            value={draft.questionCount}
+            onChange={(questionCount) => updateDraft({ questionCount })}
+          />
+        </div>
+
+        <div className="space-y-3">
+          <div>
+            <h2 className="font-display text-lg font-extrabold text-text">
+              Romaji
+            </h2>
+            <p className="mt-1 text-sm leading-6 text-text-muted">
+              Tampilkan bantuan romaji di chart dan pilihan bagian.
+            </p>
+          </div>
+          <label className="inline-flex min-h-12 cursor-pointer items-center gap-3 rounded-2xl border border-border bg-bg-soft px-4 py-2 transition hover:bg-card">
+            <input
+              type="checkbox"
+              data-testid="setting-show-romaji"
+              checked={draft.showRomaji}
+              onChange={(event) =>
+                updateDraft({ showRomaji: event.currentTarget.checked })
+              }
+              className="h-5 w-5 accent-primary"
+            />
+            <span className="text-sm font-bold text-text">
+              Tampilkan romaji
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div className="flex flex-col gap-3 border-t border-border pt-5 sm:flex-row sm:items-center sm:justify-between">
+        <p
+          className="text-sm font-semibold text-text-muted"
+          data-testid="settings-save-status"
+        >
+          {hasUnsavedChanges
+            ? "Ada perubahan belum disimpan."
+            : hasSaved
+              ? "Preferensi tersimpan."
+              : "Belum ada perubahan baru."}
+        </p>
+        <div className="flex justify-end gap-3">
           <Button
             variant="secondary"
             data-testid="settings-reset"
-            onClick={resetPreferences}
+            onClick={onReset}
           >
             Reset preferensi
           </Button>
+          <Button
+            data-testid="settings-save"
+            disabled={!hasUnsavedChanges}
+            onClick={() => onSave(draft)}
+          >
+            Simpan
+          </Button>
         </div>
-      </Card>
-    </section>
+      </div>
+    </Card>
   );
 }

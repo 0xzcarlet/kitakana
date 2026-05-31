@@ -247,6 +247,13 @@ test("settings saves kana learning preferences after reload", async ({ page }) =
   await page.getByTestId("setting-default-kana-type-katakana").click();
   await page.getByTestId("setting-question-count-5").click();
   await page.getByTestId("setting-show-romaji").uncheck();
+  await expect(page.getByTestId("settings-save-status")).toContainText(
+    "belum disimpan",
+  );
+  await page.getByTestId("settings-save").click();
+  await expect(page.getByTestId("settings-save-status")).toContainText(
+    "tersimpan",
+  );
 
   await page.reload();
 
@@ -272,6 +279,7 @@ test("kana preferences seed practice defaults and question count", async ({
   await page.getByTestId("setting-default-engine-typing").click();
   await page.getByTestId("setting-default-kana-type-katakana").click();
   await page.getByTestId("setting-question-count-20").click();
+  await page.getByTestId("settings-save").click();
 
   await page.goto("/kana/practice");
 
@@ -304,6 +312,7 @@ test("romaji preference hides kana helpers without blocking practice", async ({
 }) => {
   await page.goto("/settings");
   await page.getByTestId("setting-show-romaji").uncheck();
+  await page.getByTestId("settings-save").click();
 
   await page.goto("/kana");
 
