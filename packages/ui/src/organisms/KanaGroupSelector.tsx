@@ -255,7 +255,7 @@ export function KanaGroupSelector({
             )}
             {canStart && (
               <p className="text-xs text-text-muted">
-                {uniqueRomaji.size} jawaban unik · siap latihan!
+                Semua kana dipilih akan masuk sesi latihan.
               </p>
             )}
           </div>

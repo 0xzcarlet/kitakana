@@ -149,7 +149,7 @@ export function KanaPracticeClient({
       selectedGroups,
     );
     const newQuestions = generateKanaQuiz(pool, {
-      count: preferences.questionCount,
+      count: pool.length,
       mode: "kana-to-romaji",
       engine,
       seed: Date.now(),
@@ -249,7 +249,7 @@ export function KanaPracticeClient({
       selectedGroups,
     );
     const newQuestions = generateKanaQuiz(pool, {
-      count: preferences.questionCount,
+      count: pool.length,
       mode: "kana-to-romaji",
       engine,
       seed: Date.now(),

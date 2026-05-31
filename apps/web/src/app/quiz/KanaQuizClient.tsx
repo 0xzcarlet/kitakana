@@ -14,16 +14,17 @@ import {
   type QuizPanelOption,
   type QuizPanelSummary,
 } from "@kitakana/ui";
+import { useLearningPreferences } from "@/hooks/useLearningPreferences";
 
 const INITIAL_SEED = 1;
-const QUIZ_COUNT = 10;
 
 function createKanaQuiz(
   items: readonly KanaItem[],
+  count: number,
   seed: number,
 ): QuizQuestion[] {
   return generateKanaQuiz(items, {
-    count: QUIZ_COUNT,
+    count,
     mode: "kana-to-romaji",
     seed,
   });
@@ -33,9 +34,15 @@ export type KanaQuizClientProps = {
   items: readonly KanaItem[];
 };
 
-export function KanaQuizClient({ items }: KanaQuizClientProps) {
-  const [questions, setQuestions] = useState<QuizQuestion[]>(() =>
-    createKanaQuiz(items, INITIAL_SEED),
+type KanaQuizSessionProps = KanaQuizClientProps & {
+  questionCount: number;
+};
+
+function KanaQuizSession({ items, questionCount }: KanaQuizSessionProps) {
+  const [seed, setSeed] = useState(INITIAL_SEED);
+  const questions = useMemo(
+    () => createKanaQuiz(items, questionCount, seed),
+    [items, questionCount, seed],
   );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
@@ -112,7 +119,7 @@ export function KanaQuizClient({ items }: KanaQuizClientProps) {
   };
 
   const handleRestart = () => {
-    setQuestions(createKanaQuiz(items, Date.now()));
+    setSeed(Date.now());
     setCurrentIndex(0);
     setSelected(null);
     setAnswers([]);
@@ -135,6 +142,18 @@ export function KanaQuizClient({ items }: KanaQuizClientProps) {
       showNext={selected !== null}
       summary={summary}
       total={total}
+    />
+  );
+}
+
+export function KanaQuizClient({ items }: KanaQuizClientProps) {
+  const { preferences } = useLearningPreferences();
+
+  return (
+    <KanaQuizSession
+      key={preferences.questionCount}
+      items={items}
+      questionCount={preferences.questionCount}
     />
   );
 }

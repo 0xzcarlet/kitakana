@@ -31,6 +31,18 @@ test("quiz page gives feedback and reaches the result screen", async ({
   await expect(page.getByTestId("quiz-result-accuracy")).toContainText("%");
 });
 
+test("quiz page uses the saved quiz question count", async ({ page }) => {
+  await page.goto("/settings");
+
+  await page.getByTestId("setting-question-count-5").click();
+  await page.getByTestId("settings-save").click();
+
+  await page.goto("/quiz");
+
+  await expect(page.getByTestId("quiz-panel")).toBeVisible();
+  await expect(page.getByTestId("quiz-progress")).toHaveText("1/5");
+});
+
 test("quiz page advances with Enter after choosing an option", async ({
   page,
 }) => {

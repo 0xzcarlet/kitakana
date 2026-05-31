@@ -105,8 +105,8 @@ export function SettingsClient() {
             Preferensi Belajar
           </h1>
           <p className="max-w-2xl text-sm leading-6 text-text-muted">
-            Atur default latihan kana yang akan dipakai saat membuka chart dan
-            practice. Pilih preferensi lalu simpan saat sudah cocok.
+            Atur default practice kana, bantuan romaji, dan panjang sesi di
+            menu Quiz. Pilih preferensi lalu simpan saat sudah cocok.
           </p>
         </div>
       </Card>
@@ -185,14 +185,15 @@ function SettingsForm({
         <div className="space-y-3">
           <div>
             <h2 className="font-display text-lg font-extrabold text-text">
-              Jumlah soal
+              Jumlah soal Quiz
             </h2>
             <p className="mt-1 text-sm leading-6 text-text-muted">
-              Banyak soal dalam satu sesi latihan kana.
+              Banyak soal saat membuka menu Quiz. Practice kana mengikuti
+              jumlah kana yang kamu pilih.
             </p>
           </div>
           <SegmentedControl
-            ariaLabel="Jumlah soal"
+            ariaLabel="Jumlah soal Quiz"
             options={QUESTION_COUNT_OPTIONS.map((value) => ({
               label: `${value} soal`,
               value,
