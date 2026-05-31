@@ -35,12 +35,16 @@ export function generateQuiz(
   }
 
   const rng = createRng(seed);
-  const shuffledPool = shuffle(sources, rng);
-  const sessionSize = Math.min(count, shuffledPool.length);
+  const sessionSources: QuizSource[] = [];
+  while (sessionSources.length < count && sources.length > 0) {
+    const shuffledPool = shuffle(sources, rng);
+    const remaining = count - sessionSources.length;
+    sessionSources.push(...shuffledPool.slice(0, remaining));
+  }
 
   const questions: QuizQuestion[] = [];
-  for (let index = 0; index < sessionSize; index++) {
-    const source = shuffledPool[index];
+  for (let index = 0; index < sessionSources.length; index++) {
+    const source = sessionSources[index];
 
     if (engine === "typing") {
       questions.push({

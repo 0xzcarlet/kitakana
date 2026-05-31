@@ -271,7 +271,7 @@ test("kana preferences seed practice defaults and question count", async ({
 
   await page.getByTestId("setting-default-engine-typing").click();
   await page.getByTestId("setting-default-kana-type-katakana").click();
-  await page.getByTestId("setting-question-count-5").click();
+  await page.getByTestId("setting-question-count-20").click();
 
   await page.goto("/kana/practice");
 
@@ -292,7 +292,7 @@ test("kana preferences seed practice defaults and question count", async ({
   await page.getByTestId("start-practice-btn").click();
 
   await expect(page.getByTestId("typing-input")).toBeVisible();
-  await expect(page.getByTestId("quiz-progress")).toHaveText("1/5");
+  await expect(page.getByTestId("quiz-progress")).toHaveText("1/20");
   await expect(page.getByTestId("kana-prompt")).toHaveAttribute(
     "data-source-id",
     /katakana-/,
@@ -495,7 +495,7 @@ test(
     await expect(page.getByText(/Enter\s+untuk soal berikutnya/)).toBeVisible();
 
     await page.keyboard.press("Enter");
-    await expect(page.getByTestId("quiz-progress")).toHaveText("2/5");
+    await expect(page.getByTestId("quiz-progress")).toHaveText("2/10");
     await expect(page.getByTestId("typing-input")).toBeEnabled();
   },
 );

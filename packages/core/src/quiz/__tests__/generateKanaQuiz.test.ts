@@ -12,6 +12,20 @@ describe("generateKanaQuiz", () => {
     expect(questions).toHaveLength(10);
   });
 
+  it("repeats a small pool to satisfy the requested count", () => {
+    const vowelPool = hiragana.filter((item) => item.group === "vowel");
+    const questions = generateKanaQuiz(vowelPool, {
+      count: 10,
+      mode: "kana-to-romaji",
+      seed: 1,
+    });
+
+    expect(questions).toHaveLength(10);
+    expect(new Set(questions.map((question) => question.sourceId)).size).toBe(
+      vowelPool.length,
+    );
+  });
+
   it("returns deterministic output for the same seed", () => {
     const a = generateKanaQuiz(hiragana, {
       count: 10,
