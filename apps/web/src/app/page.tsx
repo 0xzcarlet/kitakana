@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { hiragana, katakana, kanjiN5 } from "@kitakana/content";
 import { getAbsoluteUrl, siteConfig } from "@/lib/site";
@@ -115,6 +116,7 @@ const jsonLd = [
 export default function Home() {
   const totalKana = hiragana.length + katakana.length;
   const totalKanji = kanjiN5.length;
+  const currentYear = new Date().getFullYear();
 
   return (
     <main
@@ -129,10 +131,19 @@ export default function Home() {
       <header className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-5 sm:px-6 lg:px-10">
         <Link
           href="/"
-          className="font-display text-2xl font-extrabold text-text"
+          className="inline-flex min-w-0 items-center gap-2 font-display text-xl font-extrabold text-text sm:text-2xl"
           aria-label="Kitakana home"
         >
-          Kitakana
+          <Image
+            alt=""
+            aria-hidden="true"
+            className="h-9 w-9 shrink-0 rounded-xl ring-1 ring-border/70 sm:h-10 sm:w-10"
+            data-testid="landing-logo"
+            height={40}
+            src="/icons/kitakana.svg"
+            width={40}
+          />
+          <span>Kitakana</span>
         </Link>
         <nav
           aria-label="Navigasi landing"
@@ -302,6 +313,43 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <footer
+        className="mx-auto w-full max-w-7xl px-4 pb-8 pt-4 text-center text-sm leading-7 text-text-muted sm:px-6 lg:px-10"
+        data-testid="landing-footer"
+      >
+        <p>
+          Copyright &copy; {currentYear} Kitakana. Made with{" "}
+          <svg
+            aria-label="love"
+            className="mx-1 inline h-4 w-4 align-[-0.125em] text-primary"
+            fill="currentColor"
+            role="img"
+            viewBox="0 0 24 24"
+          >
+            <path d="M12 21.35 10.55 20.03C5.4 15.36 2 12.27 2 8.5 2 5.41 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.08C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.41 22 8.5c0 3.77-3.4 6.86-8.55 11.53L12 21.35Z" />
+          </svg>{" "}
+          by{" "}
+          <a
+            className="font-bold text-text underline decoration-primary/60 underline-offset-4 transition hover:text-primary-hover"
+            href="https://github.com/0xzcarlet"
+            rel="noreferrer"
+            target="_blank"
+          >
+            alexanderzull
+          </a>
+        </p>
+        <p>
+          <a
+            className="font-display font-bold text-primary transition hover:text-primary-hover"
+            href="https://trakteer.id/zcarlet/tip"
+            rel="noreferrer"
+            target="_blank"
+          >
+            Support me on Trakteer
+          </a>
+        </p>
+      </footer>
     </main>
   );
 }

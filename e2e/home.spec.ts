@@ -7,6 +7,11 @@ test("home page renders the public SEO landing content", async ({ page }) => {
 
   await expect(page.getByTestId("landing-page")).toBeVisible();
   await expect(page.getByTestId("app-header")).toHaveCount(0);
+  await expect(page.getByTestId("landing-logo")).toBeVisible();
+  await expect(page.getByTestId("landing-logo")).toHaveAttribute(
+    "src",
+    /\/icons\/kitakana\.svg/,
+  );
   await expect(
     page.getByRole("heading", {
       name: "Belajar hiragana, katakana, dan kanji N5 dari browser.",
@@ -18,6 +23,15 @@ test("home page renders the public SEO landing content", async ({ page }) => {
   );
   await expect(page.getByTestId("landing-feature-link")).toHaveCount(4);
   await expect(page.getByText("Pertanyaan umum")).toBeVisible();
+  await expect(page.getByTestId("landing-footer")).toContainText(
+    `Copyright © ${new Date().getFullYear()} Kitakana`,
+  );
+  await expect(
+    page.getByRole("link", { name: "alexanderzull" }),
+  ).toHaveAttribute("href", "https://github.com/0xzcarlet");
+  await expect(
+    page.getByRole("link", { name: "Support me on Trakteer" }),
+  ).toHaveAttribute("href", "https://trakteer.id/zcarlet/tip");
 });
 
 test("home dashboard renders only the local learning cards", async ({ page }) => {
