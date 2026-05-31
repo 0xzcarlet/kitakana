@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { RouteAwareAppShell } from "@/components/app-shell/RouteAwareAppShell";
 import { getSiteUrl, siteConfig } from "@/lib/site";
 import "./globals.css";
@@ -68,6 +69,7 @@ export default function RootLayout({
     <html lang="id" className="h-full antialiased">
       <body className="min-h-full">
         <RouteAwareAppShell>{children}</RouteAwareAppShell>
+        <Analytics />
       </body>
     </html>
   );
