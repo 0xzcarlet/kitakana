@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import type {
   KanjiItem,
   KanjiLevelMeta,
@@ -66,6 +66,98 @@ function buildQuestions(
       mode: getMode(target),
       seed: Date.now(),
     },
+  );
+}
+
+function KanjiDetailPanel({
+  className,
+  item,
+  panelId,
+  testId,
+}: {
+  className?: string;
+  item: KanjiItem;
+  panelId?: string;
+  testId: string;
+}) {
+  return (
+    <Card
+      aria-label={`Detail kanji ${item.kanji}`}
+      className={cx("space-y-5", className)}
+      data-testid={testId}
+      id={panelId}
+      role="region"
+      tone="sun"
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <Badge tone="orange">N5</Badge>
+          <p className="mt-4 font-display text-7xl font-extrabold leading-none text-text">
+            {item.kanji}
+          </p>
+        </div>
+        <p className="rounded-full bg-card px-3 py-1 text-xs font-bold uppercase tracking-wider text-text-muted">
+          {item.strokes} stroke
+        </p>
+      </div>
+
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-wider text-text-muted">
+            Arti
+          </p>
+          <p className="mt-1 text-sm font-semibold text-text">
+            {item.meanings.join(", ")}
+          </p>
+        </div>
+        <div>
+          <p className="text-xs font-bold uppercase tracking-wider text-text-muted">
+            Bacaan utama
+          </p>
+          <p className="mt-1 text-sm font-semibold text-text">
+            {item.quizReading}
+          </p>
+        </div>
+        <div>
+          <p className="text-xs font-bold uppercase tracking-wider text-text-muted">
+            {"On'yomi"}
+          </p>
+          <p className="mt-1 text-sm font-semibold text-text">
+            {item.onyomi.length > 0 ? item.onyomi.join(", ") : "-"}
+          </p>
+        </div>
+        <div>
+          <p className="text-xs font-bold uppercase tracking-wider text-text-muted">
+            {"Kun'yomi"}
+          </p>
+          <p className="mt-1 text-sm font-semibold text-text">
+            {item.kunyomi.length > 0 ? item.kunyomi.join(", ") : "-"}
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <p className="text-xs font-bold uppercase tracking-wider text-text-muted">
+          Contoh
+        </p>
+        <div className="mt-3 space-y-2">
+          {item.examples.map((example) => (
+            <div
+              key={`${item.id}-${example.word}`}
+              className="rounded-2xl bg-card/70 p-3"
+            >
+              <p className="font-semibold text-text">
+                {example.word}{" "}
+                <span className="text-text-muted">({example.reading})</span>
+              </p>
+              <p className="mt-1 text-sm text-text-muted">
+                {example.meaning}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </Card>
   );
 }
 
@@ -324,117 +416,57 @@ export function KanjiPageClient({ kanjiN5, levels }: KanjiPageClientProps) {
             <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
               {kanjiN5.map((item) => {
                 const isActive = item.id === activeKanji?.id;
+                const inlinePanelId = `kanji-detail-inline-${item.id}`;
+
                 return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => setActiveKanjiId(item.id)}
-                    data-testid="kanji-detail-item"
-                    className={cx(
-                      "flex min-h-24 items-center gap-4 rounded-2xl border bg-card p-4 text-left transition",
-                      "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
-                      isActive
-                        ? "border-primary/70 shadow-[0_0_0_3px_rgba(244,174,82,0.2)]"
-                        : "border-border hover:border-primary/40 hover:bg-bg-soft",
-                    )}
-                  >
-                    <span className="font-display text-4xl font-extrabold text-text">
-                      {item.kanji}
-                    </span>
-                    <span className="min-w-0">
-                      <span className="block text-sm font-bold text-text">
-                        {item.meanings.join(", ")}
+                  <Fragment key={item.id}>
+                    <button
+                      type="button"
+                      aria-controls={isActive ? inlinePanelId : undefined}
+                      aria-expanded={isActive}
+                      aria-pressed={isActive}
+                      onClick={() => setActiveKanjiId(item.id)}
+                      data-testid="kanji-detail-item"
+                      className={cx(
+                        "flex min-h-24 items-center gap-4 rounded-2xl border bg-card p-4 text-left transition",
+                        "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
+                        isActive
+                          ? "border-primary/70 shadow-[0_0_0_3px_rgba(244,174,82,0.2)]"
+                          : "border-border hover:border-primary/40 hover:bg-bg-soft",
+                      )}
+                    >
+                      <span className="font-display text-4xl font-extrabold text-text">
+                        {item.kanji}
                       </span>
-                      <span className="mt-1 block text-xs font-semibold text-text-muted">
-                        {item.strokes} stroke
+                      <span className="min-w-0">
+                        <span className="block text-sm font-bold text-text">
+                          {item.meanings.join(", ")}
+                        </span>
+                        <span className="mt-1 block text-xs font-semibold text-text-muted">
+                          {item.strokes} stroke
+                        </span>
                       </span>
-                    </span>
-                  </button>
+                    </button>
+
+                    {isActive ? (
+                      <KanjiDetailPanel
+                        className="sm:col-span-2 lg:hidden"
+                        item={item}
+                        panelId={inlinePanelId}
+                        testId="kanji-detail-inline-panel"
+                      />
+                    ) : null}
+                  </Fragment>
                 );
               })}
             </div>
 
             {activeKanji ? (
-              <Card
-                className="space-y-5 lg:sticky lg:top-8 lg:self-start"
-                data-testid="kanji-detail-panel"
-                tone="sun"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <Badge tone="orange">N5</Badge>
-                    <p className="mt-4 font-display text-7xl font-extrabold leading-none text-text">
-                      {activeKanji.kanji}
-                    </p>
-                  </div>
-                  <p className="rounded-full bg-card px-3 py-1 text-xs font-bold uppercase tracking-wider text-text-muted">
-                    {activeKanji.strokes} stroke
-                  </p>
-                </div>
-
-                <div className="grid gap-3 sm:grid-cols-2">
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-text-muted">
-                      Arti
-                    </p>
-                    <p className="mt-1 text-sm font-semibold text-text">
-                      {activeKanji.meanings.join(", ")}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-text-muted">
-                      Bacaan utama
-                    </p>
-                    <p className="mt-1 text-sm font-semibold text-text">
-                      {activeKanji.quizReading}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-text-muted">
-                      {"On'yomi"}
-                    </p>
-                    <p className="mt-1 text-sm font-semibold text-text">
-                      {activeKanji.onyomi.length > 0
-                        ? activeKanji.onyomi.join(", ")
-                        : "-"}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-text-muted">
-                      {"Kun'yomi"}
-                    </p>
-                    <p className="mt-1 text-sm font-semibold text-text">
-                      {activeKanji.kunyomi.length > 0
-                        ? activeKanji.kunyomi.join(", ")
-                        : "-"}
-                    </p>
-                  </div>
-                </div>
-
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-wider text-text-muted">
-                    Contoh
-                  </p>
-                  <div className="mt-3 space-y-2">
-                    {activeKanji.examples.map((example) => (
-                      <div
-                        key={`${activeKanji.id}-${example.word}`}
-                        className="rounded-2xl bg-card/70 p-3"
-                      >
-                        <p className="font-semibold text-text">
-                          {example.word}{" "}
-                          <span className="text-text-muted">
-                            ({example.reading})
-                          </span>
-                        </p>
-                        <p className="mt-1 text-sm text-text-muted">
-                          {example.meaning}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Card>
+              <KanjiDetailPanel
+                className="hidden lg:sticky lg:top-8 lg:block lg:self-start"
+                item={activeKanji}
+                testId="kanji-detail-panel"
+              />
             ) : null}
           </div>
         </section>

@@ -1,6 +1,8 @@
 import { mainNavigation } from "./navigation";
 import { cx } from "../utils/classes";
 
+const trakteerSupportUrl = "https://trakteer.id/zcarlet/tip";
+
 export type AppSidebarProps = {
   activeHref?: string;
   className?: string;
@@ -70,6 +72,15 @@ export function AppSidebar({ activeHref = "/", className }: AppSidebarProps) {
         <p className="mt-2 text-sm leading-6 text-text-muted">
           Belajar pelan-pelan juga tetap progress.
         </p>
+        <a
+          className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-3xl bg-primary px-4 py-2 font-display text-sm font-bold text-text transition hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+          data-testid="sidebar-trakteer-link"
+          href={trakteerSupportUrl}
+          rel="noreferrer"
+          target="_blank"
+        >
+          Support on Trakteer
+        </a>
       </div>
     </aside>
   );

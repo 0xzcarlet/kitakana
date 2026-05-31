@@ -39,6 +39,50 @@ test("kanji page shows levels with N5 detail and practice actions", async ({
   );
 });
 
+test("mobile kanji detail opens inline below the selected kanji", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/kanji");
+
+  await page.getByTestId("kanji-n5-detail-btn").click();
+  await expect(page.getByTestId("kanji-detail-view")).toBeVisible();
+
+  const selectedKanji = page.getByTestId("kanji-detail-item").nth(1);
+  await selectedKanji.click();
+
+  const inlinePanel = page.getByTestId("kanji-detail-inline-panel");
+  await expect(inlinePanel).toBeVisible();
+  await expect(inlinePanel).toContainText("一");
+  await expect(inlinePanel).toContainText("satu");
+  await expect(page.getByTestId("kanji-detail-panel")).toBeHidden();
+  await expect(selectedKanji).toHaveAttribute("aria-pressed", "true");
+
+  await expect
+    .poll(async () =>
+      selectedKanji.evaluate(
+        (element) =>
+          element.nextElementSibling?.getAttribute("data-testid") ?? null,
+      ),
+    )
+    .toBe("kanji-detail-inline-panel");
+
+  await expect
+    .poll(async () => {
+      const selectedBox = await selectedKanji.evaluate((element) => {
+        const rect = element.getBoundingClientRect();
+        return { bottom: rect.bottom };
+      });
+      const panelBox = await inlinePanel.evaluate((element) => {
+        const rect = element.getBoundingClientRect();
+        return { top: rect.top };
+      });
+
+      return panelBox.top >= selectedBox.bottom;
+    })
+    .toBe(true);
+});
+
 test("kanji practice works with multiple-choice engine", async ({ page }) => {
   await page.goto("/kanji");
 

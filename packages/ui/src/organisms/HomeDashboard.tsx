@@ -1,5 +1,7 @@
 import { Card } from "../atoms";
 
+const trakteerSupportUrl = "https://trakteer.id/zcarlet/tip";
+
 export type HomeDashboardStats = {
   accuracy: number | null;
   correctAnswers: number;
@@ -36,7 +38,7 @@ export function HomeDashboard({
     <div className="min-w-0">
       <section
         aria-label="Ringkasan belajar lokal"
-        className="grid min-w-0 gap-4 lg:grid-cols-[0.9fr_1.2fr_0.9fr]"
+        className="grid min-w-0 gap-4 lg:grid-cols-3"
       >
         <Card
           className="flex min-h-60 flex-col justify-between"
@@ -64,7 +66,66 @@ export function HomeDashboard({
         </Card>
 
         <Card
-          className="relative flex min-h-60 flex-col justify-between overflow-hidden"
+          className="flex min-h-60 flex-col justify-between"
+          data-testid="home-accuracy-card"
+          tone="paper"
+        >
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-text-muted">Akurasi</p>
+              <p className="mt-4 break-words font-display text-4xl font-extrabold leading-none text-text">
+                {accuracyValue}
+              </p>
+            </div>
+            <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-bg-soft font-display text-2xl font-extrabold text-text">
+              正
+            </span>
+          </div>
+          <div>
+            <p className="text-sm leading-6 text-text-muted">
+              {stats.totalAnswers > 0
+                ? `${stats.correctAnswers}/${stats.totalAnswers} jawaban benar.`
+                : "Selesaikan kuis untuk melihat akurasi lokal."}
+            </p>
+            <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-text-muted">
+              {stats.sessionsCount} sesi tersimpan
+            </p>
+          </div>
+        </Card>
+
+        <Card
+          className="relative flex min-h-60 flex-col justify-between overflow-hidden lg:hidden"
+          data-testid="home-trakteer-card"
+          tone="sun"
+        >
+          <div className="absolute -right-6 -top-9 font-display text-[8rem] font-extrabold leading-none text-white/35">
+            支
+          </div>
+          <div className="relative max-w-md">
+            <p className="text-sm font-semibold text-text-muted">Support</p>
+            <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight text-text">
+              Support on Trakteer.
+            </h2>
+            <p className="mt-4 text-sm leading-6 text-text-muted">
+              Bantu Kitakana tetap hidup dan terus berkembang untuk belajar
+              bahasa Jepang.
+            </p>
+          </div>
+          <div className="relative mt-7 flex">
+            <a
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-text px-5 py-3 font-display text-sm font-bold text-bg-soft transition hover:bg-text/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+              data-testid="home-trakteer-link"
+              href={trakteerSupportUrl}
+              rel="noreferrer"
+              target="_blank"
+            >
+              Buka Trakteer
+            </a>
+          </div>
+        </Card>
+
+        <Card
+          className="relative hidden min-h-60 flex-col justify-between overflow-hidden lg:col-span-3 lg:flex"
           data-testid="home-kana-cta-card"
           tone="sun"
         >
@@ -90,34 +151,6 @@ export function HomeDashboard({
             >
               Mulai latihan
             </a>
-          </div>
-        </Card>
-
-        <Card
-          className="flex min-h-60 flex-col justify-between"
-          data-testid="home-accuracy-card"
-          tone="paper"
-        >
-          <div className="flex items-start justify-between gap-4">
-            <div className="min-w-0">
-              <p className="text-sm font-semibold text-text-muted">Akurasi</p>
-              <p className="mt-4 break-words font-display text-4xl font-extrabold leading-none text-text">
-                {accuracyValue}
-              </p>
-            </div>
-            <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-bg-soft font-display text-2xl font-extrabold text-text">
-              正
-            </span>
-          </div>
-          <div>
-            <p className="text-sm leading-6 text-text-muted">
-              {stats.totalAnswers > 0
-                ? `${stats.correctAnswers}/${stats.totalAnswers} jawaban benar.`
-                : "Selesaikan kuis untuk melihat akurasi lokal."}
-            </p>
-            <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-text-muted">
-              {stats.sessionsCount} sesi tersimpan
-            </p>
           </div>
         </Card>
       </section>

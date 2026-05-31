@@ -11,6 +11,11 @@ test("desktop sidebar stays pinned while content scrolls", async ({ page }) => {
     "/dashboard",
   );
   await expect(sidebar.locator('img[src="/icons/kitakana.svg"]')).toBeVisible();
+  await expect(sidebar.getByTestId("sidebar-trakteer-link")).toBeVisible();
+  await expect(sidebar.getByTestId("sidebar-trakteer-link")).toHaveAttribute(
+    "href",
+    "https://trakteer.id/zcarlet/tip",
+  );
   await expect
     .poll(() =>
       sidebar.evaluate((element) =>
@@ -40,6 +45,7 @@ test("mobile bottom nav is solid and full width", async ({ page }) => {
   await expect(nav).toBeVisible();
   await expect(nav.getByText("Kanji")).toBeVisible();
   await expect(nav.getByText("Review")).toHaveCount(0);
+  await expect(nav.getByText("Support on Trakteer")).toHaveCount(0);
 
   const metrics = await nav.evaluate((element) => {
     const rect = element.getBoundingClientRect();
