@@ -2,8 +2,26 @@ import { expect, test } from "@playwright/test";
 import { completeMultipleChoiceQuiz } from "./helpers/quiz";
 import { getLearningSessionCount } from "./helpers/storage";
 
-test("home dashboard renders only the local learning cards", async ({ page }) => {
+test("home page renders the public SEO landing content", async ({ page }) => {
   await page.goto("/");
+
+  await expect(page.getByTestId("landing-page")).toBeVisible();
+  await expect(page.getByTestId("app-header")).toHaveCount(0);
+  await expect(
+    page.getByRole("heading", {
+      name: "Belajar hiragana, katakana, dan kanji N5 dari browser.",
+    }),
+  ).toBeVisible();
+  await expect(page.getByTestId("landing-primary-cta")).toHaveAttribute(
+    "href",
+    "/kana/practice",
+  );
+  await expect(page.getByTestId("landing-feature-link")).toHaveCount(4);
+  await expect(page.getByText("Pertanyaan umum")).toBeVisible();
+});
+
+test("home dashboard renders only the local learning cards", async ({ page }) => {
+  await page.goto("/dashboard");
 
   await expect(page.getByTestId("app-header")).toBeVisible();
   await expect(page.getByRole("link", { name: /Kanji/ })).toBeVisible();
@@ -36,7 +54,7 @@ test("home dashboard reads local streak and accuracy after a quiz", async ({
     .poll(() => getLearningSessionCount(page), { timeout: 5_000 })
     .toBeGreaterThan(0);
 
-  await page.goto("/");
+  await page.goto("/dashboard");
 
   await expect(page.getByTestId("home-streak-card")).toContainText("1 hari");
   await expect(page.getByTestId("home-accuracy-card")).toContainText(/\d+%/);

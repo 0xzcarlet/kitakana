@@ -17,11 +17,14 @@ export function AppSidebar({ activeHref = "/", className }: AppSidebarProps) {
     >
       <a
         className="flex items-center gap-3 rounded-3xl p-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-        href="/"
+        href="/dashboard"
       >
-        <span className="grid size-12 place-items-center rounded-2xl bg-primary font-display text-2xl font-extrabold text-text shadow-[0_12px_24px_rgba(244,174,82,0.35)]">
-          キ
-        </span>
+        <img
+          alt=""
+          aria-hidden="true"
+          className="size-12 shrink-0 rounded-2xl shadow-[0_12px_24px_rgba(79,37,46,0.16)]"
+          src="/icons/kitakana.svg"
+        />
         <span>
           <span className="block font-display text-2xl font-extrabold leading-none text-text">
             Kitakana

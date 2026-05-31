@@ -1,9 +1,14 @@
+import type { Metadata } from "next";
 import { KANJI_LEVEL_META, kanjiN5 } from "@kitakana/content";
 import { KanjiPageClient } from "./KanjiPageClient";
 
-export const metadata = {
-  title: "Kanji N5 — Kitakana",
-  description: "Belajar detail dan latihan kanji JLPT N5.",
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/kanji",
+  },
+  description:
+    "Belajar detail kanji JLPT N5, arti, bacaan, contoh kata, dan latihan interaktif.",
+  title: "Kanji N5",
 };
 
 export default function KanjiPage() {

@@ -20,7 +20,9 @@ export type RouteAwareAppShellProps = {
 export function RouteAwareAppShell({ children }: RouteAwareAppShellProps) {
   const pathname = usePathname();
 
-  return (
-    <AppShell activeHref={getActiveHref(pathname)}>{children}</AppShell>
-  );
+  if (pathname === "/") {
+    return <>{children}</>;
+  }
+
+  return <AppShell activeHref={getActiveHref(pathname)}>{children}</AppShell>;
 }

@@ -6,6 +6,11 @@ test("desktop sidebar stays pinned while content scrolls", async ({ page }) => {
 
   const sidebar = page.getByTestId("app-sidebar");
   await expect(sidebar).toBeVisible();
+  await expect(sidebar.getByRole("link", { name: /Kitakana/ })).toHaveAttribute(
+    "href",
+    "/dashboard",
+  );
+  await expect(sidebar.locator('img[src="/icons/kitakana.svg"]')).toBeVisible();
   await expect
     .poll(() =>
       sidebar.evaluate((element) =>
@@ -29,7 +34,7 @@ test("desktop sidebar stays pinned while content scrolls", async ({ page }) => {
 
 test("mobile bottom nav is solid and full width", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+  await page.goto("/dashboard");
 
   const nav = page.getByTestId("mobile-bottom-nav");
   await expect(nav).toBeVisible();
@@ -52,4 +57,14 @@ test("mobile bottom nav is solid and full width", async ({ page }) => {
   expect(metrics.bottom).toBe(0);
   expect(metrics.radius).toBe("0px");
   expect(metrics.width).toBeGreaterThanOrEqual(389);
+});
+
+test("dashboard header shows the Kitakana logo and brand", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 720 });
+  await page.goto("/dashboard");
+
+  const header = page.getByTestId("app-header");
+  await expect(header).toBeVisible();
+  await expect(header.locator('img[src="/icons/kitakana.svg"]')).toBeVisible();
+  await expect(header.getByText("Kitakana")).toBeVisible();
 });
