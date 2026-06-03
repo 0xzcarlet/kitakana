@@ -3,9 +3,9 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Badge } from "../atoms/Badge";
-import { Button } from "../atoms/Button";
 import { Card } from "../atoms/Card";
 import { KanaTile } from "../molecules/KanaTile";
+import { SegmentedControl } from "../molecules/SegmentedControl";
 
 export type KanaChartType = "hiragana" | "katakana";
 
@@ -46,6 +46,14 @@ const BASIC_GROUPS = [
   "w",
   "n-special",
 ] as const;
+
+const KANA_TYPE_OPTIONS: {
+  label: string;
+  value: KanaChartType;
+}[] = [
+  { label: "Hiragana", value: "hiragana" },
+  { label: "Katakana", value: "katakana" },
+];
 
 function buildSections(items: readonly KanaChartItem[]): Section[] {
   const grouped = new Map<string, KanaChartItem[]>();
@@ -138,34 +146,17 @@ export function KanaChart({
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:items-end">
-          <div
-            className="inline-flex rounded-full bg-card p-1 ring-1 ring-border"
-            role="tablist"
-            aria-label="Kana type"
-          >
-            <Button
-              size="sm"
-              variant={type === "hiragana" ? "primary" : "ghost"}
-              onClick={() => setType("hiragana")}
-              aria-pressed={type === "hiragana"}
-              data-testid="kana-toggle-hiragana"
-            >
-              Hiragana
-            </Button>
-            <Button
-              size="sm"
-              variant={type === "katakana" ? "primary" : "ghost"}
-              onClick={() => setType("katakana")}
-              aria-pressed={type === "katakana"}
-              data-testid="kana-toggle-katakana"
-            >
-              Katakana
-            </Button>
-          </div>
+          <SegmentedControl
+            ariaLabel="Kana type"
+            options={KANA_TYPE_OPTIONS}
+            testId="kana-toggle"
+            value={type}
+            onChange={setType}
+          />
           <Link
             href="/kana/practice"
             data-testid="start-practice-link"
-            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2 text-sm font-bold text-white shadow-[0_4px_14px_rgba(244,174,82,0.4)] transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-5 py-2 text-sm font-bold text-text shadow-[0_4px_14px_rgba(244,174,82,0.24)] transition hover:bg-primary-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
             Mulai Latihan →
           </Link>

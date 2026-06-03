@@ -169,7 +169,7 @@ export default function Home() {
 
       <section className="relative isolate mx-auto flex w-full max-w-7xl items-center px-4 pb-16 pt-10 sm:px-6 lg:min-h-[34rem] lg:px-10">
         <div
-          className="absolute inset-0 -z-10 overflow-hidden opacity-25 sm:opacity-100"
+          className="absolute inset-0 -z-10 hidden overflow-hidden sm:block"
           aria-hidden
         >
           <div className="absolute left-1/2 top-6 h-[36rem] w-[52rem] -translate-x-1/2 rounded-[3rem] border border-border/70 bg-card/70 shadow-[0_28px_80px_rgba(79,37,46,0.12)] sm:top-10 lg:left-auto lg:right-0 lg:translate-x-0" />
@@ -242,32 +242,49 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto grid w-full max-w-7xl gap-4 px-4 py-10 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-10">
-        {featureLinks.map((feature) => (
-          <article
-            key={feature.href}
-            className="flex min-h-64 flex-col justify-between rounded-[2rem] border border-border bg-card p-5 shadow-[0_20px_50px_rgba(79,37,46,0.08)]"
-          >
-            <div>
-              <h2 className="font-display text-2xl font-extrabold text-text">
-                {feature.title}
-              </h2>
-              <p className="mt-3 text-sm leading-6 text-text-muted">
-                {feature.description}
-              </p>
-            </div>
-            <Link
-              href={feature.href}
-              data-testid="landing-feature-link"
-              className="mt-6 font-display text-sm font-bold text-primary transition hover:text-primary-hover"
-            >
-              {feature.label}
-            </Link>
-          </article>
-        ))}
+      <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 lg:px-10">
+        <div className="grid gap-8 border-y border-border py-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+          <div className="max-w-xl">
+            <h2 className="font-display text-4xl font-extrabold leading-tight text-text">
+              Mulai dari jalur yang paling ringan.
+            </h2>
+            <p className="mt-4 text-base leading-7 text-text-muted">
+              Setiap bagian diarahkan ke latihan yang berbeda: lihat bentuk
+              kana, aktifkan recall, cek hafalan cepat, lalu tambah kanji N5
+              saat dasar mulai terasa stabil.
+            </p>
+          </div>
+          <div className="overflow-hidden rounded-[1.75rem] border border-border bg-card">
+            {featureLinks.map((feature, index) => (
+              <article
+                key={feature.href}
+                className="grid gap-4 border-b border-border p-5 last:border-b-0 sm:grid-cols-[3rem_1fr_auto] sm:items-center"
+              >
+                <span className="font-display text-2xl font-extrabold text-primary">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="font-display text-xl font-extrabold text-text">
+                    {feature.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-text-muted">
+                    {feature.description}
+                  </p>
+                </div>
+                <Link
+                  href={feature.href}
+                  data-testid="landing-feature-link"
+                  className="font-display text-sm font-bold text-primary transition hover:text-primary-hover"
+                >
+                  {feature.label}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
 
-      <section className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-10">
+      <section className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-10">
         <div>
           <h2 className="font-display text-4xl font-extrabold leading-tight text-text">
             Materi awal yang bisa langsung dipakai.
@@ -276,14 +293,28 @@ export default function Home() {
             Mulai dari bunyi dasar, lanjut ke latihan aktif, lalu tambah kanji
             N5 sedikit demi sedikit.
           </p>
+          <div className="mt-7 space-y-4 border-l border-border pl-5">
+            <p className="text-sm leading-6 text-text-muted">
+              <span className="font-bold text-text">Chart kana</span> untuk
+              mengenali bentuk dan romaji.
+            </p>
+            <p className="text-sm leading-6 text-text-muted">
+              <span className="font-bold text-text">Practice</span> untuk
+              memilih bagian kecil yang ingin dilatih.
+            </p>
+            <p className="text-sm leading-6 text-text-muted">
+              <span className="font-bold text-text">Kanji N5</span> untuk
+              menambah arti, bacaan, dan contoh kata.
+            </p>
+          </div>
         </div>
-        <div className="grid gap-3 rounded-[2rem] border border-surface-strong/70 bg-surface p-5 shadow-[0_20px_50px_rgba(79,37,46,0.08)]">
+        <div className="grid gap-3 rounded-[2rem] border border-border bg-bg-soft p-5 shadow-[0_20px_50px_rgba(79,37,46,0.06)]">
           {kanaPreview.map((row, index) => (
             <div key={index} className="grid grid-cols-5 gap-2">
               {row.map((kana) => (
                 <span
                   key={kana}
-                  className="grid aspect-square place-items-center rounded-2xl bg-bg-soft font-display text-3xl font-extrabold text-text"
+                  className="grid aspect-square place-items-center rounded-2xl border border-border bg-card font-display text-3xl font-extrabold text-text"
                 >
                   {kana}
                 </span>
@@ -293,20 +324,20 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-4xl px-4 py-12 sm:px-6 lg:px-10">
+      <section className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[0.75fr_1.25fr] lg:px-10">
         <h2 className="font-display text-4xl font-extrabold text-text">
           Pertanyaan umum
         </h2>
-        <div className="mt-6 space-y-3">
+        <div className="border-y border-border">
           {faqs.map((faq) => (
             <details
               key={faq.question}
-              className="rounded-[1.5rem] border border-border bg-card p-5 text-text"
+              className="border-b border-border py-5 text-text last:border-b-0"
             >
               <summary className="cursor-pointer font-display text-lg font-extrabold">
                 {faq.question}
               </summary>
-              <p className="mt-3 text-sm leading-6 text-text-muted">
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-text-muted">
                 {faq.answer}
               </p>
             </details>

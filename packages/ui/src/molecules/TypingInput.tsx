@@ -19,8 +19,8 @@ const stateStyles: Record<TypingInputState, { container: string; input: string }
   },
   correct: {
     container:
-      "border-teal-500/70 bg-teal-100 shadow-[0_0_0_3px_rgb(20_184_166_/_0.2)]",
-    input: "text-teal-900",
+      "border-green-600/70 bg-green-100 shadow-[0_0_0_3px_rgb(22_163_74_/_0.18)]",
+    input: "text-green-900",
   },
   wrong: {
     container:
@@ -100,7 +100,7 @@ export function TypingInput({
               "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
               value.trim() === ""
                 ? "bg-border/50 text-text-muted cursor-not-allowed"
-                : "bg-primary text-white shadow-[0_4px_14px_rgba(244,174,82,0.4)] hover:opacity-90",
+                : "bg-primary text-text shadow-[0_4px_14px_rgba(244,174,82,0.24)] hover:bg-primary-hover",
             )}
           >
             Cek
@@ -111,10 +111,10 @@ export function TypingInput({
       {/* Feedback text */}
       {state === "correct" && (
         <p
-          className="flex items-center gap-2 text-sm font-semibold text-teal-700"
+          className="flex items-center gap-2 text-sm font-semibold text-green-700"
           data-testid="typing-feedback-correct"
         >
-          <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-teal-500 text-xs text-white">
+          <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-green-600 text-xs text-white">
             ✓
           </span>
           Benar!

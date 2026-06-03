@@ -2,13 +2,13 @@
 @source "../../../../packages/ui/src";
 
 :root {
-  --background: #fff7c5;
+  --background: #fbebc5;
   --foreground: #4f252e;
-  --bg: #fff7c5;
-  --bg-soft: #fffbe2;
+  --bg: #ffffff;
+  --bg-soft: #fffaf0;
 
-  --surface: #c1ebe9;
-  --surface-strong: #a8dfdc;
+  --surface: #f7ead8;
+  --surface-strong: #ead7b8;
 
   --primary: #f4ae52;
   --primary-hover: #e39a3b;
@@ -16,10 +16,10 @@
   --text: #4f252e;
   --text-muted: #7b5a61;
 
-  --border: #e7d9a8;
+  --border: #eadfc4;
   --ring: #f4ae52;
 
-  --card: #fffdf0;
+  --card: #fffaf0;
   --card-foreground: #4f252e;
 }
 
@@ -47,10 +47,7 @@
 
 body {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 16% 8%, rgb(193 235 233 / 0.65), transparent 28rem),
-    radial-gradient(circle at 85% 2%, rgb(244 174 82 / 0.22), transparent 24rem),
-    linear-gradient(180deg, var(--background), #fff3b2 100%);
+  background: #ffffff;
   color: var(--foreground);
   font-family:
     "Hiragino Sans", "Yu Gothic", "Meiryo", "Avenir Next", sans-serif;
@@ -58,6 +55,7 @@ body {
 
 html,
 body {
+  background: #ffffff;
   max-width: 100%;
   overflow-x: clip;
 }

@@ -12,7 +12,7 @@ export type QuizOptionProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const stateClasses: Record<QuizOptionState, string> = {
   idle: "border-border bg-card text-text hover:border-primary/60 hover:bg-bg-soft",
-  correct: "border-teal-500/70 bg-teal-100 text-teal-900",
+  correct: "border-green-600/70 bg-green-100 text-green-900",
   wrong: "border-red-600 bg-red-100 text-red-900 [border-width:2px] shadow-[0_0_0_3px_rgb(220_38_38_/_0.2)]",
   disabled: "border-border bg-card/60 text-text-muted",
 };

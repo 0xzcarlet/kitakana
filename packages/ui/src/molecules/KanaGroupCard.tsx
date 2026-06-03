@@ -40,7 +40,7 @@ export function KanaGroupCard({
         "transition duration-200",
         "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
         isSelected
-          ? "border-primary/60 bg-primary/10 shadow-[0_0_0_2px_rgba(244,174,82,0.25)]"
+          ? "border-primary bg-primary/10 shadow-sm"
           : "border-border bg-card hover:border-primary/30 hover:bg-bg-soft",
       )}
     >
@@ -51,7 +51,7 @@ export function KanaGroupCard({
         className={cx(
           "absolute bottom-4 right-4 flex h-6 w-6 items-center justify-center rounded-full border-2 transition duration-200 sm:bottom-5 sm:right-5",
           isSelected
-            ? "border-primary bg-primary text-white"
+            ? "border-primary bg-primary text-text"
             : "border-border bg-transparent",
         )}
       >
@@ -109,7 +109,7 @@ export function KanaGroupCard({
           className={cx(
             "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold uppercase tracking-wider",
             isSelected
-              ? "bg-primary/20 text-primary"
+              ? "bg-primary/20 text-text"
               : "bg-bg-soft text-text-muted",
           )}
         >

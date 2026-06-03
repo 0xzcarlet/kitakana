@@ -9,7 +9,6 @@ export type AppShellProps = {
 export function AppShell({ activeHref = "/", children }: AppShellProps) {
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_20%_10%,rgba(193,235,233,0.7),transparent_26rem),radial-gradient(circle_at_85%_0%,rgba(244,174,82,0.25),transparent_22rem)]" />
       <div className="relative z-10 flex min-h-screen">
         <AppSidebar activeHref={activeHref} />
         <div className="min-w-0 flex-1 lg:pl-72">

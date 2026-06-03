@@ -6,8 +6,25 @@ import { Badge } from "../atoms/Badge";
 import { Button } from "../atoms/Button";
 import { Card } from "../atoms/Card";
 import { KanaGroupCard } from "../molecules/KanaGroupCard";
+import { SegmentedControl } from "../molecules/SegmentedControl";
 
 const MIN_UNIQUE_ROMAJI = 4;
+
+const KANA_TYPE_OPTIONS: {
+  label: string;
+  value: KanaType;
+}[] = [
+  { label: "Hiragana", value: "hiragana" },
+  { label: "Katakana", value: "katakana" },
+];
+
+const ENGINE_OPTIONS: {
+  label: string;
+  value: "multiple-choice" | "typing";
+}[] = [
+  { label: "Pilihan ganda", value: "multiple-choice" },
+  { label: "Ketik jawaban", value: "typing" },
+];
 
 export type KanaGroupSelectorProps = {
   /** Ordered metadata for every kana group */
@@ -125,66 +142,42 @@ export function KanaGroupSelector({
           </p>
         </div>
 
-        {/* Kana type toggle */}
-        <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-            Jenis kana
-          </p>
-          <div
-            className="inline-flex gap-2"
-            role="group"
-            aria-label="Pilih jenis kana"
-          >
-            {(["hiragana", "katakana"] as const).map((type) => (
-              <button
-                key={type}
-                type="button"
-                role="checkbox"
-                aria-checked={selectedTypes.has(type)}
-                data-testid={`type-toggle-${type}`}
-                onClick={() => onToggleType(type)}
-                className={`rounded-full px-4 py-2 text-sm font-bold capitalize transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
-                  selectedTypes.has(type)
-                    ? "bg-primary text-white shadow-[0_4px_14px_rgba(244,174,82,0.4)]"
-                    : "border border-border bg-card text-text-muted hover:bg-bg-soft"
-                }`}
-              >
-                {type}
-              </button>
-            ))}
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="space-y-3">
+            <div>
+              <h2 className="font-display text-lg font-extrabold text-text">
+                Jenis kana
+              </h2>
+              <p className="mt-1 text-sm leading-6 text-text-muted">
+                Pilih Hiragana, Katakana, atau keduanya untuk sesi ini.
+              </p>
+            </div>
+            <SegmentedControl
+              ariaLabel="Pilih jenis kana"
+              mode="multiple"
+              options={KANA_TYPE_OPTIONS}
+              testId="type-toggle"
+              values={selectedTypes}
+              onToggle={onToggleType}
+            />
           </div>
-        </div>
 
-        {/* Engine toggle */}
-        <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">
-            Mode latihan
-          </p>
-          <div
-            className="inline-flex gap-2"
-            role="radiogroup"
-            aria-label="Pilih mode latihan"
-          >
-            {([
-              { value: "multiple-choice" as const, label: "Pilihan" },
-              { value: "typing" as const, label: "Ketikan" },
-            ]).map((mode) => (
-              <button
-                key={mode.value}
-                type="button"
-                role="radio"
-                aria-checked={engine === mode.value}
-                data-testid={`engine-toggle-${mode.value}`}
-                onClick={() => onChangeEngine(mode.value)}
-                className={`rounded-full px-4 py-2 text-sm font-bold transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
-                  engine === mode.value
-                    ? "bg-primary text-white shadow-[0_4px_14px_rgba(244,174,82,0.4)]"
-                    : "border border-border bg-card text-text-muted hover:bg-bg-soft"
-                }`}
-              >
-                {mode.label}
-              </button>
-            ))}
+          <div className="space-y-3">
+            <div>
+              <h2 className="font-display text-lg font-extrabold text-text">
+                Mode latihan
+              </h2>
+              <p className="mt-1 text-sm leading-6 text-text-muted">
+                Gunakan pilihan ganda untuk pemanasan atau ketik untuk recall.
+              </p>
+            </div>
+            <SegmentedControl
+              ariaLabel="Pilih mode latihan"
+              options={ENGINE_OPTIONS}
+              testId="engine-toggle"
+              value={engine}
+              onChange={onChangeEngine}
+            />
           </div>
         </div>
       </Card>
@@ -225,11 +218,11 @@ export function KanaGroupSelector({
       </div>
 
       {/* Sticky footer action bar */}
-      <div className="sticky bottom-4 z-10">
+      <div className="lg:sticky lg:bottom-4 lg:z-10">
         <Card
           className={`flex flex-col gap-3 transition-all duration-300 sm:flex-row sm:items-center sm:justify-between ${
             selectedGroups.size > 0
-              ? "border-primary/30 shadow-[0_8px_32px_rgba(244,174,82,0.18)]"
+              ? "border-primary/40 shadow-[0_8px_28px_rgba(79,37,46,0.10)]"
               : ""
           }`}
         >

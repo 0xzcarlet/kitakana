@@ -7,7 +7,7 @@ import type {
   LearningPracticeEngine,
   LearningQuestionCount,
 } from "@kitakana/storage";
-import { Badge, Button, Card } from "@kitakana/ui";
+import { Badge, Button, Card, SegmentedControl } from "@kitakana/ui";
 import { useLearningPreferences } from "@/hooks/useLearningPreferences";
 
 const ENGINE_OPTIONS: {
@@ -28,58 +28,6 @@ const KANA_TYPE_OPTIONS: {
 ];
 
 const QUESTION_COUNT_OPTIONS: LearningQuestionCount[] = [5, 10, 20];
-
-type SegmentedOption<TValue extends string | number> = {
-  label: string;
-  value: TValue;
-};
-
-type SegmentedControlProps<TValue extends string | number> = {
-  ariaLabel: string;
-  options: readonly SegmentedOption<TValue>[];
-  testId: string;
-  value: TValue;
-  onChange: (value: TValue) => void;
-};
-
-function SegmentedControl<TValue extends string | number>({
-  ariaLabel,
-  options,
-  onChange,
-  testId,
-  value,
-}: SegmentedControlProps<TValue>) {
-  return (
-    <div
-      className="inline-flex flex-wrap gap-2 rounded-[1.25rem] bg-bg-soft p-1 ring-1 ring-border"
-      role="radiogroup"
-      aria-label={ariaLabel}
-      data-testid={testId}
-    >
-      {options.map((option) => {
-        const isSelected = option.value === value;
-
-        return (
-          <button
-            key={option.value}
-            type="button"
-            role="radio"
-            aria-checked={isSelected}
-            data-testid={`${testId}-${option.value}`}
-            onClick={() => onChange(option.value)}
-            className={`min-h-11 rounded-2xl px-4 py-2 text-sm font-bold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
-              isSelected
-                ? "bg-primary text-text shadow-[0_8px_20px_rgba(244,174,82,0.25)]"
-                : "text-text-muted hover:bg-card hover:text-text"
-            }`}
-          >
-            {option.label}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
 
 export function SettingsClient() {
   const { preferences, resetPreferences, updatePreferences } =
