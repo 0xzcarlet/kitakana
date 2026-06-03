@@ -20,7 +20,13 @@ This README follows the documentation structure recommended by [Make a README](h
 
 ### Mobile
 
+Dashboard:
+
 ![Kitakana dashboard mobile](docs/kitakana-dashboard-mobile.png)
+
+Kana list:
+
+![Kitakana kana list mobile](docs/kitakana-kana-list-mobile.png)
 
 ## Features
 
@@ -53,8 +59,7 @@ This README follows the documentation structure recommended by [Make a README](h
 ├── packages/storage      # Local-first persistence
 ├── packages/ui           # Shared UI components
 ├── e2e                   # Playwright tests
-├── docs                  # App screenshots and documentation assets
-└── PRD.md                # Product requirements document
+└── docs                  # App screenshots and documentation assets
 ```
 
 ## Installation
