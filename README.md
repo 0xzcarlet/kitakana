@@ -20,13 +20,10 @@ This README follows the documentation structure recommended by [Make a README](h
 
 ### Mobile
 
-Dashboard:
-
-![Kitakana dashboard mobile](docs/kitakana-dashboard-mobile.png)
-
-Kana list:
-
-![Kitakana kana list mobile](docs/kitakana-kana-list-mobile.png)
+<p>
+  <img src="docs/kitakana-dashboard-mobile.png" alt="Kitakana dashboard mobile" width="260" />
+  <img src="docs/kitakana-kana-list-mobile.png" alt="Kitakana kana list mobile" width="260" />
+</p>
 
 ## Features
 
