@@ -10,8 +10,6 @@
 
 Kitakana is an open-source Japanese learning PWA built for the browser. It currently helps beginners practice hiragana, katakana, kana quizzes, JLPT N5 kanji, learning preferences, and local progress without requiring an account.
 
-This README follows the documentation structure recommended by [Make a README](https://www.makeareadme.com/): description, visuals, installation, usage, support, roadmap, contributing, project status, and license.
-
 ## App Documentation
 
 ### Desktop
